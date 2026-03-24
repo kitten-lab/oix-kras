@@ -1,0 +1,76 @@
+[data-theme="COLORSET-VAPORWAVE"] {
+
+    --color-darkA: rgb(5, 46, 228);
+    --color-darkB: rgb(0, 225, 255);
+    --color-midB: rgb(255, 0, 149);
+    --color-midA: rgb(100, 180, 143);
+    --color-lightA: rgb(225, 255, 0);
+    --color-lightB: rgb(255, 0, 221);
+    --color-accentA: rgb(194, 173, 41);
+    --color-bright: rgb(236, 65, 73);
+    --color-unexpectedA: rgb(17, 255, 204);    
+    --color-accentB: rgb(168, 245, 35);
+    --color-pure-white: rgb(255, 255, 255);
+    --color-pure-black: rgb(0, 0, 0);
+    --color-pure-gray: rgb(83, 83, 83);
+
+
+    --oix-core-backgroundImage: radial-gradient(circle at center, var(--color-midA) 1px, transparent 0);
+    --iox-core-ContainerBorderColor: var(--color-darkB);
+    --oix-core-gridBackground: var(--color-darkA);
+    --oix-core-TextColor: var(--color-midA);
+
+    --oix-mast-bgColor: transparent;
+    --oix-mast-bgImage: linear-gradient(var(--oix-mast-bgImageColorA), var(--oix-mast-bgImageColorB));
+    --oix-mast-bgImageColorA: var(--color-midA);
+    --oix-mast-bgImageColorB: var(--color-midB);
+
+    --oix-mast-edgeStyle: solid;
+    --oix-mast-edgeColor: var(--color-unexpectedA);
+
+    --oix-mast-houseMarkColor: var(--color-darkA);
+    --oix-mast-houseMarkInsetColor: var(--color-midA);
+    --oix-mast-proprietorMarkColor: var(--color-bright);
+    --oix-mast-proprietorMarkInsetColor: var(--color-darkA);
+
+    --oix-mast-navColor: var(--color-darkA);
+    --oix-mast-navColorHover: var(--color-darkB);
+    --iox-mast-navTextShadow: var(--color-midA);
+    --iox-mast-navTextShadowHover: var(--color-darkB);
+
+    --iox-mast-navBtnBorderColor: var(--color-accentA);
+    --iox-mast-navBtnBorderColorHover: var(--color-unexpectedA);
+    --iox-mast-navBtnBorderStyle: solid;
+    --iox-mast-navBtnBorderStyleHover: solid;
+
+    --oix-footer-borderStyle: solid;
+    --oix-footer-borderColor:var(--color-darkA);
+    --oix-footer-bgColorA:var(--color-lightA);
+    --oix-footer-bgColorB:var(--color-lightB);
+    --oix-footer-shadowColor:var(--color-unexpectedA);
+    --oix-footer-textColor:var(--color-darkA);
+    --oix-footer-textLink:var(--color-darkB);
+    --oix-footer-textLinkHover:var(--color-pure-black);
+
+    --oix-navi-sectionHead-color: var(--color-darkB);
+    --oix-navi-sectionSubHead-color: var(--color-darkA);
+    --iox-navi-headerInsetColor: var(--color-bright);
+
+    --oix-navi-backgroundStyle: linear-gradient(var(--color-midA), var(--color-lightA), var(--color-midA));
+    --oix-navi-borderColor: var(--color-midA);
+    --oix-navi-borderStyle: solid;
+    
+    --oix-navi-btnBorderColor: var(--color-darkB);
+    --oix-navi-btnBorderStyle: solid;
+    --oix-navi-btnShadowColor: var(--color-midA);
+    --oix-navi-btnLabelColor: var(--color-darkB);
+    --oix-navi-btnBackground: linear-gradient(var(--color-midA), var(--color-lightB));
+    --oix-navi-btnTextColorHover:var(--color-lightA);
+    --oix-navi-btnShadowColorHover:var(--color-accentA);
+    --oix-navi-btnBorderStyleHover:dashed;
+    --oix-navi-btnBorderColorHover:var(--color-lightA);
+
+    --font-family-accent: 'Mona Sans Black', 'Inter';
+    --font-family-standard: 'Mona Sans', 'Inter';
+    --oix-navi-boxGlow: 0rem 0rem 4rem var(--color-unexpectedA);
+}
