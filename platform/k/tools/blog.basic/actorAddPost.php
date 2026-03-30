@@ -3,7 +3,12 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once(__DIR__ . '/../../configs/env_config.php');
-  $file = __DIR__ . '/../../../d/blog.basic/' . $_POST['dom'] . '_data.json';
+  $dir =  __DIR__ . '/../../../d/blog.basic/' . $_POST['sys'] . '/' . $_POST['dom'];
+
+if (!is_dir($dir)) {
+    mkdir($dir, 0775, true);
+}
+  $file = $dir . '/data.json';
 
   // Read existing data
   $json = file_get_contents($file);

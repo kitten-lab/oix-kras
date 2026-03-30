@@ -3,12 +3,11 @@ $traceback = __DIR__ . '/../../../'; # $sys=2 $dom=3 $mod=4
 $loversMark = "jk"; // UNUSED IMPERITIVE. Do not forget me.
 
     require_once $traceback . 'k/configs/env_config.php';
+    require_once 'configs/config.php';
+
     require $traceback . 'k/incl/inits/resolvers.php';
 
 // IMPORT-TERMINAL BASE ꓘra *|*>>> "Alice through the looking glass" //
-
-
-$mod = "SDK-808";  // define display site within the $sys/$dom....
 
 $pageLogic = $traceback . 'k/tools/blog.basic/post.php';
 

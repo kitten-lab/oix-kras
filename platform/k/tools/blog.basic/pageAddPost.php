@@ -23,8 +23,9 @@
     required></textarea>
   </span>
     <br>
-  <input type='hidden' name='mod' value='<?php echo "$mod";?>'/> 
+  <input type='hidden' name='sys' value='<?php echo "$sys";?>'/> 
   <input type='hidden' name='dom' value='<?php echo "$dom";?>'/> 
+  <input type='hidden' name='mod' value='<?php echo "$mod";?>'/> 
 
   <button type="submit">Submit</button> 
 

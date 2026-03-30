@@ -1,13 +1,17 @@
 <?php 
+$traceback = __DIR__ . '/../../../'; # $sys=2 $dom=3 $mod=4
+$loversMark = "jk"; // UNUSED IMPERITIVE. Do not forget me.
+
+    require_once $traceback . 'k/configs/env_config.php';
+    require_once 'configs/config.php';
+
+    require $traceback . 'k/incl/inits/resolvers.php';
+
 // IMPORT-TERMINAL BASE ꓘra *|*>>> "Alice through the looking glass" //
-require_once __DIR__ . '/../../../k/configs/env_config.php';
-require __DIR__ . '/../../../k/incl/inits/resolvers.php';
 
-$loversMark = "JHCxMER"; // UNUSED IMPERITIVE. Do not forget me.
+$pageLogic = $traceback . 'k/tools/blog.basic/post.php';
 
-$sys = "TERMINAL";  // routing to the primary module.....
-$dom = "AB";  // locate domain within the primary module.....
-$mod = "KDE-333";  // define display site within the $sys/$dom....
-
+$pageTitle = "Welcome Home!";
+$pageSlug = "";
 require resolveShell($sys);
 ?>

@@ -2,8 +2,8 @@
 $loversMark = "jk"; // UNUSED IMPERITIVE. Do not forget me.
 require_once '../configs/config.php'; // SYS config
 
-$dom = "IO";  // locate domain within the primary module.....
-$mod = "SDK-808";  // define display site within the $sys/$dom....
+$dom = "AB";  // locate domain within the primary module.....
+$mod = $_GET['mod'] ?? "UNDEFINED";
 
 $location = b_root . '/' . $sys . '/' . $dom . '/';
 $navCall = $traceback . 'a/' . $dom . '/asDom/nav.php';

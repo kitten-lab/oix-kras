@@ -11,8 +11,8 @@
     <?php
         // Echo the HTML link tag to include the external CSS file
         echo '<link rel="stylesheet" type="text/css" href="' . k_root . '/incl/fonts.css">';
-        echo '<link rel="stylesheet" type="text/css" href="' . a_root . '/' . $sys . '/' . $sys . '_sys.style.css">';
-        echo '<link rel="stylesheet" type="text/css" href="' . a_root . '/' . $dom . '/' . $dom . '_dom.style.css">';
+        echo '<link rel="stylesheet" type="text/css" href="' . a_root . '/' . $sys . '/asSys/style.css">';
+        echo '<link rel="stylesheet" type="text/css" href="' . a_root . '/' . $dom . '/asDom/style.css">';
     ?>
     </head>
     <body>
