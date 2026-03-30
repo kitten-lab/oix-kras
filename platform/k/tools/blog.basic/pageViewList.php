@@ -1,0 +1,19 @@
+<?php $config = $blogBasic ?? []; ?>
+
+<div class="blogBasic_container">
+<h1><?= $config['listSectTitle'] ?? 'Viewing all listings.'; ?>
+</h1>
+<p class="blogBasic_content">
+
+    <?= $config['listSectText'] ?? 'Viewing all listings.'; ?>
+</p>
+<?php 
+$posts = array_reverse($posts);
+
+foreach ($filtered as $post) {
+  echo "<a class='blogBasic_listing' href='blog.viewPost.php?id={$post['id']}'>";
+  echo $post['title'] . " — " . date("Y-m-d H:i", $post['date']);
+  echo "</a><br>";
+}
+?>
+</div>

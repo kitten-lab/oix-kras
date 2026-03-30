@@ -1,4 +1,7 @@
-<h1>Posts</h1>
+
+<?php $config = $blogBasic ?? []; ?>
+<br>
+<div class="blogBasic_container">
 <?php 
 foreach ($posts as $post) {
   if ($post['id'] == $id) {
@@ -10,3 +13,4 @@ foreach ($posts as $post) {
 
 echo '<br><a href="javascript:history.go(-1)" title="Return to previous page">« Go back</a>';
 ?>
+</div>

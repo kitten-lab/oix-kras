@@ -1,20 +1,18 @@
 <?php 
-$traceback = __DIR__ . '/../../../'; # $sys=2 $dom=3 $mod=4
-$loversMark = "jk"; // UNUSED IMPERITIVE. Do not forget me.
 
-    require_once $traceback . 'k/configs/env_config.php';
-    require $traceback . 'k/incl/inits/resolvers.php';
+$traceback = __DIR__ . '/../../../'; # $sys=2 $dom=3 $mod=4
+$traceback2 = __DIR__ . '/../../'; # $sys=2 $dom=3 $mod=4
+require_once $traceback . 'k/configs/env_config.php';
+
+require_once 'configs/config.php';
+require $traceback . 'k/incl/inits/resolvers.php';
 
 // IMPORT-TERMINAL BASE ꓘra *|*>>> "Alice through the looking glass" //
 
-$sys = "TERMINAL";  // routing to the primary module.....
-$dom = "IO";  // locate domain within the primary module.....
-$mod = "SDK-808";  // define display site within the $sys/$dom....
-
-$pageLogic = $traceback . 'k/tools/blog.basic/add_post.php';
-
 $pageTitle = "$mod.POST";
-$pageSlug = "pages/addpost.php";
+
+$pageLogic = $traceback . 'k/tools/blog.basic/actorAddPost.php';
+$pageSlug = $traceback . 'k/tools/blog.basic/pageAddPost.php';
 
 require resolveShell($sys);
 ?>

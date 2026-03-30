@@ -1,0 +1,3 @@
+<?php
+$sys = "TERMINAL";  // routing to the primary module.....
+?>
