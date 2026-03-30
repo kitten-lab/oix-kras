@@ -1,6 +1,6 @@
 <?php
 $loversMark = "jk"; // UNUSED IMPERITIVE. Do not forget me.
-require_once '../configs/config.php'; // SYS config
+require_once '../_configs/config.php'; // SYS config
 
 $dom = "IO";  // locate domain within the primary module.....
 $mod = "SDK-808";  // define display site within the $sys/$dom....

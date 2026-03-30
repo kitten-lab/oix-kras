@@ -1,11 +1,15 @@
 <?php
 $loversMark = "jk"; // UNUSED IMPERITIVE. Do not forget me.
-require_once '../configs/config.php'; // SYS config
+require_once '../_configs/config.php'; // SYS config
 
 $dom = "AB";  // locate domain within the primary module.....
 $mod = $_GET['mod'] ?? "UNDEFINED";
-
 $location = b_root . '/' . $sys . '/' . $dom . '/';
+
+ function linkIsMod($linkTo, $linkName, $mod) {
+    echo '<a href="' . $location . $linkTo . '?mod=' . $mod . '">' . $linkName . '</a>';
+} 
+
 $navCall = $traceback . 'a/' . $dom . '/asDom/nav.php';
 
 // =========================================================== //

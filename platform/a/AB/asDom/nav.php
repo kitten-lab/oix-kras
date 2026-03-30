@@ -3,8 +3,7 @@
 <ul>
 
 <h1>HI <?= $mod ?></h1>
-<li><a href="<?= $location ?>index.php?mod=<?= $mod ?>">HOME</a></li>
-  <li><a href="<?= $location ?>blog.addPost.php?mod=<?= $mod ?>">NEW POST</a></li>
-  <li><a href="<?= $location ?>blog.postList.php?mod=<?= $mod ?>">VIEW POSTS</a></li>
-  <br>
+<li><?php linkIsMod('index.php', 'HOME', $mod); ?></li>
+<li><?php linkIsMod('blog.addPost.php', 'NEW POST', $mod); ?></li>
+<li><?php linkIsMod('blog.postList.php', 'VIEW POSTS', $mod); ?></li>
   </ul> </nav>  </aside>
