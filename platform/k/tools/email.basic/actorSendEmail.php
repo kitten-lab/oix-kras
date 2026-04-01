@@ -25,11 +25,13 @@ if (!is_dir($dir)) {
     "ch.IMP_EPC" => $_POST['chIMP_EPC'],
     "ch.IMP_LIC" => date('\RY \E\Dm:\E\Tw:\E\Nd'),
     "ch.IMP_TP" => date('\Dg:\Ti:\Ns'),
-    "bet.LOC" => 'b:||' . $_POST['betSys'] . '|' . $_POST['betDom'] . '^mod:' . $_POST['betMod'],
+    "bet.ORIGIN" => 'b:||' . $_POST['betSys'] . '|' . $_POST['betDom'] . '^mod:' . $_POST['betMod'],
     "to_bet.dom" => $_POST['to_betDom'],
     "to_bet.mod" => $_POST['to_betMod'],
-    "from_bet.dom" => $_POST['betDom'],
-    "from_bet.mod" => $_POST['betMod'],
+    "to_bet.sys" => $_POST['to_betSys'],
+    "from_bet.dom" => $_POST['from_betDom'],
+    "from_bet.mod" => $_POST['from_betMod'],
+    "from_bet.sys" => $_POST['from_betSys'],
     "log.leafTopic" => $_POST['log_leafTopic'],
     "log.leafText" => $_POST['log_leafText']
   ];

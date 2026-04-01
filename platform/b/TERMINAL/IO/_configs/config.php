@@ -10,6 +10,40 @@ $navCall = $traceback . 'a/' . $dom . '/asDom/nav.php';
 
 // =========================================================== //
 
+$nav = [
+    "navSec" => [
+        "name" => "SYS.COMS",
+        "items" => [
+            [ 
+            "label" => "INVENTORY", 
+            "path" => "blog.postList.php",
+            "subSec" => [
+                [ "label" => "MAKE POST", "path" => "blog.addPost.php" ],
+                [ "label" => "VIEW POSTS", "path" => "blog.postList.php" ],
+                ],
+            ],
+            [ 
+            "label" => "CHARLIE-MAIL", 
+            "path" => "blog.postList.php",
+            "subSec" => [
+                [ "label" => "EMAIL TEST", "path" => "email-test.php" ],
+                [ "label" => "INBOX TEST", "path" => "inbox-test.php" ]
+                ],
+            ],
+         ],
+            
+        ],
+    [
+        "name" => "DOM.TOOLS",
+        "items" => [
+            [ "label" => "SELECTOR", "path" => "index.php" ],
+            [ "label" => "SPLITTER", "path" => "index.php" ],
+            [ "label" => "CATAGORIZER", "path" => "index.php" ],
+            [ "label" => "SANTIZER", "path" => "index.php" ],
+        ]
+    ]
+];
+
 $blogBasic = [
     "addSectTitle" => "SUBJECT OF CONTRIBUTION",
     "placeholderTitle" => "$sys.$dom CONTRIBUTION CONTENTS",
@@ -34,5 +68,7 @@ $emailBasic = [
     "listSectTitle" => "Contribution Listings",
     "listSectText" => "Viewing all listings from $mod in $sys.$dom."
 ]
+
+
 
 ?>

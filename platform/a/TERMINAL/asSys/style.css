@@ -35,7 +35,8 @@ p.blogBasic_content {
 
 h1 {
     margin: 0;
-    padding: 0;
+    padding: .15vh;
+    margin-left: .75vh;
     text-transform: uppercase;
 }
 
@@ -44,6 +45,17 @@ h1.pageTitle {
     font-family: "Sixtyfour";
     text-transform: uppercase;
     line-height: 1.6rem;
+    margin:0;
+}
+
+
+h2.pageTitle {
+    font-size: .8rem;
+    font-family: "Sixtyfour";
+    text-transform: uppercase;
+    line-height: 1.2rem;
+    margin:0;
+    padding: 1vh 0;
 }
 
 input, textarea, select {
@@ -89,7 +101,6 @@ textarea {
     margin-right: -20px;
 }
 
-
 .emailBasic_formEl {
     display: flex;
 }
@@ -106,6 +117,36 @@ input.emailBasic {
     content: ">| ";
     margin-top: .45rem;
     margin-right: -20px;
+}
+
+.mail_listRow {
+    display: flex;
+    background-color: var(--my-fav-colorInvis);
+    margin: .5vh;
+}
+
+.mail_listRow::before {
+    content: "[";
+}
+
+.mail_listRow::after {
+    content: "]";
+}
+
+.mail_listFrom {
+    display: flex;
+    margin-right: 3vh;
+}
+
+
+.mail_listDate {
+    display: flex;
+    font-size: 1.5vh;
+    padding-top: .3vh;
+}
+
+.mail_listSubject {
+    flex: 1;
 }
 
 button {
@@ -321,6 +362,9 @@ html {
 display: inline-block;
 }
 
+a.navSubSec::before {
+    content: "  -> ";
+}
 li {
     list-style:  none;}
 
@@ -336,9 +380,9 @@ li a {
     text-decoration: none;
     opacity: 0.7;
 }
-nav {padding: 10px;}
+nav {padding: .5vh 1vh;}
 li a::before {
-    content: "> ";
+    content: "* ";
 }
 
 ul {
@@ -347,7 +391,32 @@ ul {
 
 li a:hover {
     display: block;
-    border: 1px solid var(--my-fav-color);
+    border-left: 1px solid var(--my-fav-color);
+    background-color: var(--my-dark-color);
+    opacity: 1.0;
+}
+
+
+
+li a.navSubSec {
+ font-size: .8vh;
+
+    display: block;
+    border: 1px none var(--my-dark-color);
+    width: 15vh;
+    padding: 1vh;
+    margin: -.5vh 1.3vh 0;
+    font-family: "Press Start 2P";
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+li a.navSubSec:hover {
+
+    padding: 1vh;
+    margin: -.5vh 5px 0;
+    display: block;
+    border-right: 1px solid var(--my-fav-color);
     background-color: var(--my-dark-color);
     opacity: 1.0;
 }

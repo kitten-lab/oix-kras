@@ -25,6 +25,12 @@
         class="emailBasic" 
         placeholder="<?= $config['toDomLine'] ?? 'DOM'; ?>" 
         required>
+  </span><span class="emailBasic_formEl">
+
+    <input name="to_betSys"
+        class="emailBasic" to_
+        placeholder="<?= $config['toModLine'] ?? 'SYS'; ?>" 
+        required>
   </span>
   </div>
   <span class="blogBasic_formEl">
@@ -45,8 +51,9 @@
   <input type='hidden' name='betSys' value='<?php echo "$sys";?>'/> 
   <input type='hidden' name='betDom' value='<?php echo "$dom";?>'/> 
   <input type='hidden' name='betMod' value='<?php echo "$mod";?>'/> 
-  <input type='hidden' name='to_betDom' value='<?php echo "$dom";?>'/> 
-  <input type='hidden' name='to_betMod' value='<?php echo "$mod";?>'/> 
+  <input type='hidden' name='from_betSys' value='<?php echo "$sys";?>'/> 
+  <input type='hidden' name='from_betDom' value='<?php echo "$dom";?>'/> 
+  <input type='hidden' name='from_betMod' value='<?php echo "$mod";?>'/> 
 
   <button type="submit">Submit</button> 
 
