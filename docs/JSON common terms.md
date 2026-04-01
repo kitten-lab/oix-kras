@@ -39,9 +39,9 @@ N = Second
 
 `//** ALWAYS PASS THROUGH LOC.KEYS $sys, $dom, $mod **//
 ```
-"bet.sys" => GET $sys
-"bet.dom" => GET $dom
-"bet.mod" => GET $mod
+"betSys" => GET $sys
+"betDom" => GET $dom
+"log_leafText" => GET $mod
 ```
 
 `//** STORE THE PASSED DATA IN JSON'S BEAUTIFUL SELF AS **//`

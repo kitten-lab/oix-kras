@@ -3,7 +3,7 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once(__DIR__ . '/../../configs/env_config.php');
-  $dir =  __DIR__ . '/../../../d/email.basic/' . $_POST['sys'];
+  $dir =  __DIR__ . '/../../../d/email.basic/' . $_POST['betSys'];
 
 if (!is_dir($dir)) {
     mkdir($dir, 0775, true);
@@ -22,16 +22,16 @@ if (!is_dir($dir)) {
   $newPost = [
     "ch.IMP_OIC" => bin2hex(random_bytes(3)),
     "gaia.UNIX" => time(), 
-    "ch.IMP_EPC" => $_POST['ch.IMP_EPC'],
+    "ch.IMP_EPC" => $_POST['chIMP_EPC'],
     "ch.IMP_LIC" => date('\RY \E\Dm:\E\Tw:\E\Nd'),
     "ch.IMP_TP" => date('\Dg:\Ti:\Ns'),
-    "bet.LOC" => 'b:||' . $_POST['bet.sys'] . '|' . $_POST['bet.dom'] . '^mod:' . $_POST['bet.mod'],
-    "to_dom" => $_POST['to_dom'],
-    "to_mod" => $_POST['to_mod'],
-    "from_dom" => $_POST['from_dom'],
-    "from_mod" => $_POST['from_mod'],
-    "branchTitle" => $_POST['branchTitle'],
-    "branchLeaf" => $_POST['branchLeaf']
+    "bet.LOC" => 'b:||' . $_POST['betSys'] . '|' . $_POST['betDom'] . '^mod:' . $_POST['betMod'],
+    "to_bet.dom" => $_POST['to_betDom'],
+    "to_bet.mod" => $_POST['to_betMod'],
+    "from_bet.dom" => $_POST['betDom'],
+    "from_bet.mod" => $_POST['betMod'],
+    "log.leafTopic" => $_POST['log_leafTopic'],
+    "log.leafText" => $_POST['log_leafText']
   ];
 
   // Add it
