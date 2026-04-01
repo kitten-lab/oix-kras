@@ -2,6 +2,8 @@
 
 $ENV = 'local';
 
+date_default_timezone_set("America/New York");
+
 if ($ENV === 'local') {
     define('a_root', 'http://localhost:9808/a');
     define('b_root', 'http://localhost:9808/b');

@@ -89,6 +89,25 @@ textarea {
     margin-right: -20px;
 }
 
+
+.emailBasic_formEl {
+    display: flex;
+}
+
+input.emailBasic {
+    width: 20vh;
+}
+.emailBasic_flexRow {
+    display: flex;
+}
+.emailBasic_formEl::before {
+    display: block;
+    position: absolute;
+    content: ">| ";
+    margin-top: .45rem;
+    margin-right: -20px;
+}
+
 button {
     width: 13vh; 
     height: 4vh; 
