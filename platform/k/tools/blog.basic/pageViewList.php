@@ -8,7 +8,8 @@
     <?= $config['listSectText'] ?? 'Viewing all listings.'; ?>
 </p>
 <?php 
-$filtered = array_reverse($posts);
+
+$posts = array_reverse($posts);
 
 foreach ($filtered as $post) {
   echo "<a class='blogBasic_listing' href='logView.php?id={$post['ch.IMP_OIC']}&mod=$mod&pv=$pv'>";

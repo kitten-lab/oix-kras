@@ -2,9 +2,7 @@
 <?php $config = $blogBasic ?? []; ?>
 
 <div class="blogBasic_container">
-<h1>
-    <?= $config['addSectTitle'] ?? 'My Blog'; ?>
-</h1>
+<h1><?= $config['addSectTitle'] ?? 'My Blog'; ?></h1>
 <p class="blogBasic_content">
     <?= $config['addSectText'] ?? 'Add a new post to my blog!'; ?>
 </p>

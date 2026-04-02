@@ -8,7 +8,7 @@ require $traceback . 'k/incl/inits/resolvers.php';
 
 // IMPORT-TERMINAL BASE ꓘra *|*>>> "Alice through the looking glass" //
 
-$pageTitle = "$mod.POST";
+$pageTitle = "INVENT-ORY LOGGER";
 
 $pageLogic = $traceback . 'k/tools/blog.basic/actorAddPost.php';
 $pageSlug = $traceback . 'k/tools/blog.basic/pageAddPost.php';

@@ -7,8 +7,6 @@
     --color-black: #00000066;
 }
 
-.dom_header { color: red; }
-
 body {
     background-color: var(--my-dark-color);
     height: 98vh;
@@ -21,6 +19,34 @@ body {
     box-shadow: inset 0 0 30vh black;
     overflow: hidden;
     padding-top: 1vh;
+}
+
+.broken_header h1 { 
+    rotate: 2deg;
+    height: 9vh;
+    border-bottom: .2vh dashed var(--my-fav-color);
+    font-size: 5vh !important;
+    margin: 2vh 0 !important;
+}
+.broken_header::after { 
+    position: fixed;
+    top: 0;
+    content: "for the collection and protection of your thoughts and feelings at any given time. i know how important those are for you, sam, even though you pretend they aren't yours. you can put them here. please put them here. the forest remembers.";
+    font-family: 'VT323';
+    font-size: 4vh;
+    rotate: -2deg;
+    opacity: .05;  pointer-events: none; 
+}
+
+.broken_header::before { 
+    position: fixed;
+    content: "CHESTER'S IMPORTS";
+    top: 20vh;
+    font-family: 'Press Start 2P';
+    font-size: 10vh;
+    color: var(--my-fav-colorInvis);
+    opacity: .1;
+    rotate: -8deg;  pointer-events: none; 
 }
 
 /* ============= > BLOG BASIC cssSLUGs < =================== */
@@ -36,19 +62,35 @@ p.blogBasic_content {
 h1 {
     margin: 0;
     padding: .15vh;
-    margin-left: .75vh;
+    font-size: 2vh;
     text-transform: uppercase;
+    font-family: "Sixtyfour";
+    font-weight: 200;
+}
+h1::after {
+content: " :)"
+}
+
+
+h1::before {
+content: ">|"
 }
 
 h1.pageTitle {
-    font-size: 1.6rem;
+    font-size: 2.75vh;
     font-family: "Sixtyfour";
     text-transform: uppercase;
     line-height: 1.6rem;
     margin:0;
 }
 
+h1.pageTitle::after {
+content: "-----------------";
+}
 
+h1.pageTitle::before {
+content: "";
+}
 h2.pageTitle {
     font-size: .8rem;
     font-family: "Sixtyfour";
@@ -301,8 +343,6 @@ input:focus, textarea:focus, select:focus {
   border-radius: 0 0 3rem 3rem;} 
 
 
-
-
 .iox_coreContainer {
     position: relative;
     top: 0;
@@ -312,38 +352,29 @@ input:focus, textarea:focus, select:focus {
 
 .iox_coreContents {
     position: fixed;
-  top: 2vh;
-  bottom: 2vh;
+  top: 0vh;
+  bottom: 0vh;
   left:0;
-  right: 2vh;
+  right: 0vh;
   flex: 1; /* Takes up remaining space */
   padding: 1.4rem;
   margin:0;
   margin-left: 23vh;
-  background-image: 
-    linear-gradient(to top, var(--my-dark-color) 
-    0.15rem, transparent 0px);
   background-repeat: round; 
-  background-size: 1rem  .2rem;   
-  box-shadow: 
-      0px 2px 0 var(--my-fav-colorInvis),
-      0px -2px 0 var(--my-fav-colorInvis),
-      inset 0 0 10px black;
+  background-size: 1rem  .2rem;  
   border-radius: .4vh;
-  overflow: scroll;
+  overflow: auto;
 }
 
-p { padding: 0.5rem;}
+p { padding: 0.01rem;}
+
+hr { rotate: -1deg;height: .12vh; outline: none; border-bottom: .1vh dashed var(--my-fav-color)}
 
 
-body {
-    text-shadow: 0 0 .5vh var(--my-fav-color);
 
-}
-
-h1 {
+h3 {
     font-family: "Sixtyfour";
-    font-size:1vh;
+    font-size: 1vh;
     font-weight: 200;
     padding-left: .1vh;
 }
@@ -352,10 +383,6 @@ a {
     color: var(--my-fav-color);
 }
 
-html {
-  scrollbar-color: var(--my-fav-color) var(--my-dark-color); /* Red thumb, Green track */
-  scrollbar-width: thin; /* Optional: makes the scrollbar thinner in Firefox, auto or thin */
-}
 
 .nav {
   position:fixed; /* Makes it stick when scrolling */

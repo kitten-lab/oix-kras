@@ -9,9 +9,9 @@ Adjust to your preferred system language. If none are provided,
 the system defaults will be appended. */
 
 $blogBasic = [
-    "addSectTitle" => /** 
+    "addSectTitle" =>/** 
     the Section Title
-    DISPLAY: **/ "TERMINAL THOUGHT LOGGER",
+    DISPLAY: **/ "TERMINAL.THOUGHT.LOGGER",
 
     "addSectText" =>  /** 
     the section text displayed below the header

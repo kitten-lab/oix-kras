@@ -10,10 +10,12 @@
     <!-- THE CALLING OF THE STYLESHEET PROCESSION -->
     <?php
         // Echo the HTML link tag to include the external CSS file
-        echo '<link rel="stylesheet" type="text/css" href="' . k_root . '/incl/fonts.css">';
-        echo '<link rel="stylesheet" type="text/css" href="' . a_root . '/' . $sys . '/asSys/style.css">';
+        echo '<link rel="stylesheet" type="text/css" href="' . k_root . '/incl/fonts.css?v1">';
+        echo '<link rel="stylesheet" type="text/css" href="' . a_root . '/' . $sys . '/asSys/style.css?v1">';
         echo '<link rel="stylesheet" type="text/css" href="' . a_root . '/' . $dom . '/asDom/style.css">';
     ?>
+    <style>
+    </style>
     </head>
     <body>
 <!-- END OPENING PRAYERS -->
@@ -27,8 +29,9 @@
     include $navCall; } ?>
 
 <main class="iox_coreContents">
+<div class="broken_header">
 <h1 class="pageTitle"><?= $pageTitle ?></h1>
-
+</div>
 <?php if (!empty($pageSlug) && file_exists($pageSlug)) {
     include $pageSlug; } 
     
