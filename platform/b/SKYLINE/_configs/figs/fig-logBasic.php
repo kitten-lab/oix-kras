@@ -8,7 +8,7 @@
 Adjust to your preferred system language. If none are provided,
 the system defaults will be appended. */
 
-$blogBasic = [
+$logBasic = [
     "addSectTitle" =>/** 
     the Section Title
     DISPLAY: **/ "Skyline Public Recorder",

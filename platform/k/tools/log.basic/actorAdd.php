@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $chestUID = 'U-' . strtoupper(bin2hex(random_bytes(7)));
+  $chestUID = 'cUID-' . strtoupper(bin2hex(random_bytes(7)));
   $ms = round(microtime(true) * 1000);
   $dir =  $GLOBALS['sonar'] . 'd/log.basic/' . $_POST['betSys'] . '/' . $_POST['betDom'];
 
@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     "acting.SYSTEM" => $_POST['betSys'],
     "acting.CTRLS" => $_POST['betDom'],
     "acting.DOLLY" => $_POST['betMod'],
-    "acting.VIEWPORT" => $_GET['pv'] ?? 'WATCHER',
+    "acting.VIEWPORT" => $_GET['pv'] ?? '__UNDISCLOSED__',
     "tps.REFS" => [
-    "tps.gaiaDATE" => date('Ymd'), 
+    "tps.gaiaDATE" => date('M d, Y h:i:s A'), 
     "tps.gaiaUNIX" => time(),
     "tps.cwEPC" => $_POST['cwEPC'],
     "tps.cwCYC" => date('\T\e\mY.\V\e\tW'),
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $betMOD = $_POST['betMod'];
   $betACTION = "POSTED: LOG";
   $reportHEAD = "log.basic|actorAdd";
-  $tpsUID = 'tps >| ' . date('Ymd') . '.' . strtoupper(bin2hex(random_bytes(3)));
+  $tpsUID = 'tUID-' . date('Ymd') . '.' . strtoupper(bin2hex(random_bytes(3)));
 
     if (!$tpss) {
         $tpss = [];
@@ -81,15 +81,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $tpss[$betSYS][$betDOM][$betMOD][$tpsUID] = [
-    "chest.UID" => $chestUID,
-    "chest.ACTION" => $betACTION,
-    "chest.EVENT: log.leafTOPIC" => $_POST['log_leafTopic'],
-    "tps.gaiaDATE" => date('M d, Y h:i:s A'),
-    "tps.gaiaUNIX" => time(),
-    "acting.VIEWPORT" => $_GET['pv'] ?? 'UNDISCLOSED',
-    "acting.TOOL" => $reportHEAD,
-    "kde.CHKR" => kdeCHECK($hash),
-        ];
+        "chest.UID" => $chestUID,
+        "chest.ACTION" => $betACTION,
+        "log.leafTOPIC" => $_POST['log_leafTopic'],
+        "meta.DATA" => [
+            "tps.gaiaDATE" => date('M d, Y h:i:s A'),
+            "tps.gaiaUNIX" => time(),
+            "acting.VIEWPORT" => $_GET['pv'] ?? '__UNDISCLOSED__',
+            "acting.TOOL" => $reportHEAD,
+            "kde.CHKR" => kdeCHECK($hash),
+        ]
+    
+    ];
 
 //$tpss = $tpss[$betLOC][$reportHEAD];
   file_put_contents($tpsReport, json_encode($tpss, JSON_PRETTY_PRINT));
