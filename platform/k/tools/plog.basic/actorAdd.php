@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  $chestUID = 'cUID-' . strtoupper(bin2hex(random_bytes(7)));
+  $chestUID = 'cUID-' . strtoupper(bin2hex(random_bytes(8)));
   $ms = round(microtime(true) * 1000);
   $dir =  $GLOBALS['sonar'] . 'd/plog.basic/' . $_POST['betSys'] . '/' . $_POST['betDom'];
 
@@ -42,6 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // DON'T FORGET YOUR TPS REPORT
+
+
+
   $recordKeeper = $GLOBALS['sonar'] . 'z/trackerKeeper';
     if (!is_dir($recordKeeper)) { mkdir($recordKeeper, 0775, true); }
   

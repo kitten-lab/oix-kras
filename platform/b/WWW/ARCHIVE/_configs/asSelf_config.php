@@ -2,6 +2,7 @@
 ==================== C O N F I G . f i l e  ==================== 
 ================================================================
 >| Do not forget me. */ $loversMark = "808ʞps"; /*
+>| Do not remove me. */ require_once '../_configs/asSys_config.php'; /*
 ----------------------------------------------------------------
 
 Welcome to the configuration file for TERMINAL SYSTEMS.
@@ -15,9 +16,8 @@ CHEERS -chester >|
 ~             CONFIG BYTS "TERMINAL" REQUIREMENTS             ~
 ----------------------------------------------------------------
 
-    [1] **/ $GLOBALS['sys'] = "SKYLINE"; /**
-    [1] **/ $GLOBALS['dom'] = "PUBLIC_OFFICE"; /**
-    [2] **/ $GLOBALS['mod'] = $_GET['mod'] ?? "PUBLIC_USER"; /**
+    [1] **/ $GLOBALS['dom'] = "ARCHIVE"; /**
+    [2] **/ $GLOBALS['mod'] = $_GET['mod'] ?? "ARCHIVER"; /**
     [3] ** $navCall = $traceback . 'a/' . $dom . '/asDom/nav.php'; /**
     [4] CONFIG CALLS: **/ require_once 'getFigs.php'; /**
     

@@ -1,7 +1,4 @@
 <?php 
-
-
-
 $center = "alignCenter";
 $left = "alignLeft";
 $right = "alignRight";

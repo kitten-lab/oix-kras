@@ -1,5 +1,5 @@
 <?php
-$GLOBALS['sonar'] = realpath(__DIR__ . "/../../../") . '/';
+$GLOBALS['sonar'] = realpath(__DIR__ . "/../../../../") . '/';
 # remove /../ per dir up, add /../ per directory deeper
 
 # only ABL edit below this line!!!!!!!!!!
