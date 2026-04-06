@@ -10,6 +10,11 @@ function skylite($result) {
     };
 }
 
+
+function nameSelf($text) { 
+    $GLOBALS['mod'] = $text;
+}
+
 function openSky($title){
     $GLOBALS['pageTitle'] = $title;
 }

@@ -4,6 +4,7 @@ $sys = $GLOBALS['sys'];
 $dom = $GLOBALS['dom'];
 $mod = $GLOBALS['mod'];
 $sonar = $GLOBALS['sonar'];
+
 $path = $sonar . 'd/plog.basic/' . $sys . '/' . $dom . '/data.json';
 $logs = json_decode(file_get_contents($path), true);
 
