@@ -1,8 +1,7 @@
 
-<?php $config = $plogBasic_add ?? []; 
-$sys = $GLOBALS['sys'];
-$dom = $GLOBALS['dom'];
-$mod = $GLOBALS['mod'];
+<?php 
+require __DIR__ . '/../../incl/inits/nameSelf.php';
+$config = $GLOBALS['plogBasicAdd'] ?? []; 
 ?>
 <form method="POST" action="">
 
@@ -23,6 +22,7 @@ $mod = $GLOBALS['mod'];
 
   <input type='hidden' name='betSys' value='<?= $sys; ?>''/> 
   <input type='hidden' name='betDom' value='<?= $dom; ?>''/> 
+  <input type="hidden" name="betTZone" id="tz-input">
   <input type='hidden' name='betMod' value='<?= $mod; ?>'/> 
 
   <button 
@@ -40,3 +40,7 @@ $mod = $GLOBALS['mod'];
 
     </span></div>
     </form>
+
+<script>
+  document.getElementById('tz-input').value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+</script>

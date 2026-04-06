@@ -7,8 +7,8 @@
 ----------------------------------------------------------------
 Adjust to your preferred system language. If none are provided,
 the system defaults will be appended. */
-$plogBasic_gaia = false;
-$plogBasic_add = [
+$GLOBALS['plogBasic_GaiaTime'] = true;
+$GLOBALS['plogBasicAdd'] = [
 
     "Title" =>/** 
     the Section Title
@@ -38,7 +38,7 @@ $plogBasic_add = [
     
 ]; 
 
-$plogBasic_list = [
+$GLOBALS['plogBasicList'] = [
 
     "Title" =>  /** 
     the section title for the listing of posts

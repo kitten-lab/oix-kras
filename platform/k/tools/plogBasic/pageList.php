@@ -1,11 +1,8 @@
-<?php $config = $plogBasic_list ?? [];  
+<?php 
+require __DIR__ . '/../../incl/inits/nameSelf.php';
+$config = $GLOBALS['plogBasicList'] ?? []; 
 
-$sys = $GLOBALS['sys'];
-$dom = $GLOBALS['dom'];
-$mod = $GLOBALS['mod'];
-$sonar = $GLOBALS['sonar'];
-
-$path = $sonar . 'd/plog.basic/' . $sys . '/' . $dom . '/data.json';
+$path = $sonar . 'd/plogBasic/' . $sys . '/' . $dom . '/data.json';
 $logs = json_decode(file_get_contents($path), true);
 
 if (!$logs) {
@@ -23,7 +20,7 @@ $filtered = array_filter($logs, function($log) use ($mod) {
 <?php 
 foreach ($logs as $log) {
   echo "<span class='plogBasic_listItem'><a
-  href='" . $link . ".php?go={$cUID}&mod=$mod&pv=$pv'>";
+  href='" . $config['Page_Link'] . ".php?go={$cUID}&mod=$mod&pv=$pv'>";
   echo $log['log.leafTopic'] . "</a> ";
   echo "<span class='plogBasic_metaData'>";
   echo "</span>";

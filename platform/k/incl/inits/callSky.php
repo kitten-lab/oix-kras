@@ -105,6 +105,7 @@ function getA_Style($css, $folder, $function) {
 }
 
 function loadTool($tool, $type, $function) {
+
     $result = $GLOBALS['sonar'] . $GLOBALS['ktool'] . $tool . '/' . $type . $function . '.php';
     if (is_file($result)) {
         include $result;
@@ -127,7 +128,8 @@ function loadTool_Style($tool) {
 
 
 function getTool($tool, $function) {
-    $GLOBALS['GETS']['set'][] = function() use ($tool, $function) {
+    
+    $GLOBALS['GETS']['set'][] = function() use ($tool, $function) { 
         loadTool($tool, "page", $function);
     };
     $GLOBALS['GETS']['actor'][] = function() use ($tool, $function) {
