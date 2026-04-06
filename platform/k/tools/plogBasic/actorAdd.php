@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // CHANGE PER TOOL //
   $chestNOTE = $_POST['plog_leafTopic']; 
+  $chestCONTENT = $_POST['plog_leafText']; 
   $betACTION = "POSTED: plogBASIC";
   $reportHEAD = "plog.basic|actorAdd";
 
@@ -110,7 +111,7 @@ $tpsDATA = buildTPS($unix,$ms,$tzone);
   $echos[$localtime . ': ' . $chestNOTE] = [
     "chest.REF" => $chestUID, 
     "tps.REF" => $tpsUID, 
-    "chest.NOTE" => $chestNOTE,
+    "chest.NOTE" => $chestCONTENT,
     "gaia.DATE" => date('Y-m-d'),
     "gaia.TIME" => $localtime,
     "gaia.TZONE" => $timezone,

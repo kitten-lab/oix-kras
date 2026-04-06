@@ -11,11 +11,9 @@ $path = $sonar . 'd/plogBasic/' . $sys . '/' . $dom . '/data.json';
 $logs = json_decode(file_get_contents($path), true);
 
 $go = $_GET['go'];
-$cUID = array_keys($logs);
-$cUID = $cUID[0];
 
 foreach ($logs as $log) {
-  if ($go == $cUID) {
+  if ($go == $log['meta.DATA']['chest.UNIX']) {
     echo "<h1>{$log['log.leafTopic']}</h1>";
     echo $Parsedown->text($log['log.leafText']);
   }

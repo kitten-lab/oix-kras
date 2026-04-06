@@ -49,7 +49,7 @@ $GLOBALS['plogBasicList'] = [
     DISPLAY: **/ "Viewing all listings from $mod in $sys.$dom.",
 
     "Page_Link" => /**
-    DISPLAY: **/ "view_reports"
+    DISPLAY: **/ "view-report"
 ]
 
 ?>
