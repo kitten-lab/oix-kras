@@ -1,0 +1,14 @@
+<?php
+$GLOBALS['sonar'] = realpath(__DIR__ . "/../../") . '/';
+require_once $sonar . 'easyRoutes.php';
+require_once $sonar . $k['config'] . 'env_config.php';
+require_once '-SKY_SIG-.php';
+
+include $sonar . $c[$self] . 'actingAsSelf.php';
+
+$GLOBALS['GETS'] = [
+    "actor" => [],
+    "dressing" => [],
+    "set" => []
+];
+?>

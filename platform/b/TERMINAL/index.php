@@ -1,5 +1,7 @@
 <?php 
-require_once '_configs/clrRoutes.php';
+require_once '-SKY_AUTH-.php';
+require_once $sonar . $k['systems'] . "invokeSky.php"; 
+
 $YouAreHere = 'b/TERMINAL';
 
 if (empty($_GET)) {
