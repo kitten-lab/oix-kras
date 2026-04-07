@@ -41,7 +41,7 @@ foreach ($_GET as $room => $key) {
     foreach ($doors as $door){
         if ($room == $door['name']) {
             $foundRoom = true;
-            $path = __DIR__ . '/_rooms_/' . $door['name'] .'/' . $key . '.php';
+            $path = $sonar . $m['rooms'] . $site . '/' . $door['name'] .'/' . $key . '.php';
             if (empty($key)) {
                 skylite(openSky("Room without a Key"));
                 skylite(medHeading("There is a room but no key."));
