@@ -10,16 +10,6 @@ the system defaults will be appended. */
 $GLOBALS['plogBasic_GaiaTime'] = true;
 $GLOBALS['plogBasicAdd'] = [
 
-    "Title" =>/** 
-    the Section Title
-    DISPLAY: **/ "Skyline Public Recorder",
-
-    "Content" =>  /** 
-    the section text displayed below the header
-    DISPLAY: **/ "The SKYLINE May have eyes in every cell, but 
-    you have your own eyes too. Do you have something to report? 
-    Consider entering it below.",
-
     "Leaf_Topic_placeholder" =>  /** 
     the display text inside the subject
     DISPLAY: **/ "$sys TOPIC REPORT",
@@ -40,19 +30,11 @@ $GLOBALS['plogBasicAdd'] = [
 
 $GLOBALS['plogBasicList'] = [
 
-    "Title" =>  /** 
-    the section title for the listing of posts
-    DISPLAY: **/ "Contribution Listings",
-    
-    "Content" =>  /** 
-    the section text displayed on the listing page
-    DISPLAY: **/ "Viewing all listings from $mod in $sys.$dom.",
-
     "Page_Link" => /**
     DISPLAY: **/ "plog-view",
 
     "Page_Key" => /**
-    DISPLAY: **/ "ROOT"
+    DISPLAY: **/ "root"
 ]
 
 ?>
