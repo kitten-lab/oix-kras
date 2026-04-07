@@ -4,7 +4,7 @@
 } ?>
     <!DOCTYPE html>
     <html><head>
-    <title><?= $pageTitle ?></title>
+    <title><?= $GLOBALS['pageTitle'] ?></title>
     <!-- THE CALLING OF THE STYLESHEET PROCESSION -->
    <?php 
 foreach ($GLOBALS['GETS']['dressing'] as $fn) {
@@ -27,7 +27,7 @@ foreach ($GLOBALS['GETS']['dressing'] as $fn) {
 
 <main class="iox_coreContents">
 <div class="broken_header">
-<h1 class="pageTitle"><?= $pageTitle ?></h1>
+<h1 class="pageTitle"><?= $GLOBALS['pageTitle'] ?></h1>
 </div>
 <?php foreach ($GLOBALS['GETS']['set'] as $fn) {
     echo $fn();
