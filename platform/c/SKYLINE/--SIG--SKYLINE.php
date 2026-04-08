@@ -3,19 +3,19 @@
 ================================================================
 >| Do not forget me. */ $loversMark = "808ʞps"; 
 
-$GLOBALS['sys'] = "TERMINAL"; 
-$GLOBALS['dom'] = "IO"; 
-$GLOBALS['mod'] = $_GET['mod'] ?? "SDK-808"; 
-$GLOBALS['site'] = "IO"; 
-$GLOBALS['SITE_SLUG'] = "IO"; 
+$GLOBALS['sys'] = "SKYLINE"; 
+$GLOBALS['dom'] = "PUBLIC_OFFICE"; 
+$GLOBALS['mod'] = $_GET['mod'] ?? "CLERK"; 
+$GLOBALS['site'] = "SKYLINE"; 
+$GLOBALS['SITE_SLUG'] = "SKYLINE"; 
 
 $GLOBALS[$site]['room'] = [
-                    ["name" => "IO"],
+                    ["name" => "PUBLIC_OFFICE"],
                     ["name" => "COMMS"],
                     ["name" => "window"]]; 
 $GLOBALS[$site]['key'] = "home"; 
 
-    include __DIR__ . '/-FIG--nav.php';
+    #include __DIR__ . '/-FIG--nav.php';
     include __DIR__ . "/-FIG--plogBasic.php"; 
     include __DIR__ . "/-FIG--mailroomBasic.php"; 
     include __DIR__ . "/-FIG--routeErrors.php"; 

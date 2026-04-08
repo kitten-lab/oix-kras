@@ -1,7 +1,7 @@
 <?php
 openSky($sys . '.' . $dom);
 
-section($right,'color:gray','');
+section($right,'','');
 
 bigHeading("MAILROOM VIEWER");
 leaf("INTERA MAIL CHARLIE OMEGA 4.3.3

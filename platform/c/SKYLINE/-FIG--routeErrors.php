@@ -7,14 +7,10 @@ function noKeyFound(){
 }
 
 function notARoom(){
-        skylite(openSky("POINT WRONG DIRECTION"));
-        skylite(bigHeading("YOU ARE IN A HALLWAY"));
+        skylite(openSky("SKYLINE FRONT DESK"));
+        skylite(bigHeading("SKYLINE REGRETS TO INFORM YOU THAT YOU ARE BETWEEN PLACES"));
         skylite(leaf("
-        THIS SPACE IS THE SPACE BETWEEN SOMEWHERE AND TERMINAL.IO. 
-         PERHAPS IT IS THE LAYERS OF THE TERMINAL.IO ITSELF, BETWEEN ITS SEAMS. 
-         IT SEEMS YOU ARE TRYING TO MOVE THROUGH THE SCENE. 
-         
-         I MEAN SEAMS. SEEMS GOOD. PROCEED, SAM."));
+        PERHAPS YOU MEANT TO BE HERE. DID YOU WISH TO VISIT THE PUBLIC_OFFICE?"));
 }
 
 function aRoomWithNoKey(){

@@ -3,6 +3,7 @@
 $GLOBALS['c'][$sys] = 'c/' . $sys . '/';
 $GLOBALS['a'][$sys] = 'a/' . $sys . '/';
 $GLOBALS['c'][$dom] = 'c/' . $dom . '/';
+$GLOBALS['b'][$site] = 'b/' . $site . '/';
 
 // Resolve the Root Shell (routes to correct shell for the $dom)
 function resolveShell($sys) {

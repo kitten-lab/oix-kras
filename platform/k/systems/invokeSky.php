@@ -2,7 +2,7 @@
 $center = "alignCenter";
 $left = "alignLeft";
 $right = "alignRight";
-$BR = "<br>";
+$AND = "<br>";
 
 include $sonar . 'k/systems/skyInvocations.php';
 
@@ -40,8 +40,7 @@ function stop_colorize() {
 }
 
 function leaf($text) {
-    strip_tags($text, "$BR"); 
-    skylite($text);
+    skylite(nl2br($text));
 }
 
 function wordsx($text, $c="") {

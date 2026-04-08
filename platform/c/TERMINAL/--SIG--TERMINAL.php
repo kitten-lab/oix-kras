@@ -6,9 +6,9 @@
 $GLOBALS['SITE_SLUG'] = "TERMINAL"; 
 
 $GLOBALS[$site]['room'] = [
-                    ["name" => "IO"],
                     ["name" => "root"],
                     ["name" => "communications"],
+                    ["name" => "IO"],
                     ["name" => "null"]]; 
 $GLOBALS[$site]['key'] = "home"; 
 

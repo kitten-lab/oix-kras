@@ -19,8 +19,7 @@ $filtered = array_filter($logs, function($log) use ($mod) {
 
 <?php 
 foreach ($logs as $log) {
-  echo "<span class='plogBasic_listItem'><a
-  href='?" . $config['Page_Key'] . "=" . $config['Page_Link'] . "&go=" . $log['meta.DATA']['chest.UNIX'] . "'>";
+  echo "<span class='plogBasic_listItem'><a href='window?" . $config['Page_Key'] . "=" . $config['Page_Link'] . '&go=' . $log['meta.DATA']['chest.UNIX'] . "'>";
   echo $log['log.leafTopic'] . "</a> ";
   echo "<span class='plogBasic_metaData'>";
   echo "</span>";
