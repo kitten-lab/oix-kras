@@ -1,15 +1,15 @@
 <?php /* 
 ==================== C O N F I G . f i l e  ==================== 
 ================================================================
->| Do not forget me. */ $loversMark = "DESTINY"; 
+>| Do not forget me. */ $loversMark = "I-ALWAYS-LOVE-YOU"; 
 
-$GLOBALS['SITE_SLUG'] = "A_WHOLE_NEW_WORLD"; 
+$GLOBALS['SITE_SLUG'] = "HOME"; 
 
 $GLOBALS[$site]['room'] = [
                     ["name" => "WELCOME-HOME"],
-                    ["name" => "OUTLOOK"],
+                    ["name" => "THE_ROOM"],
                     ];
-$GLOBALS[$site]['key'] = "A_WHOLE_NEW_WORLD"; 
+$GLOBALS[$site]['key'] = "HOME"; 
 
     
     include __DIR__ . "/-FIG--nav.php";
@@ -25,6 +25,6 @@ $GLOBALS[$site]['key'] = "A_WHOLE_NEW_WORLD";
     }
 
     function getMy_WWW($www){
-        $GLOBALS['A_WHOLE_NEW_WORLD']['bar'] = $www;
+        $GLOBALS['HOME']['bar'] = $www;
     }
 ?>

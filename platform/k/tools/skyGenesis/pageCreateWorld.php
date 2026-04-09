@@ -4,6 +4,10 @@
 <form method="POST" action="">
 
 <input name="GEN__WORLD_NAME" placeholder="NAME" required><br>
+<input type="radio" id="asSys" name="ACTING__AS" value="asSys">
+  <label for="html">SYS</label><br>
+  <input type="radio" id="asDom" name="ACTING__AS" value="asDom">
+  <label for="html">DOM</label><br>
 <input name="GEN__WORLD_SYS" placeholder="SYS" required><br>
 <input name="GEN__WORLD_DOM" placeholder="DOM" required><br>
 <input name="GEN__WORLD_MOD" placeholder="MOD" required><br>
