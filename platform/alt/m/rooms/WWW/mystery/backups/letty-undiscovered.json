@@ -1,0 +1,74 @@
+{
+    "cUID-11AAA6A2999B503E": {
+        "tps.REF": "tUID-20260408.396A9F",
+        "openSky.TITLE": "LETTY IS OUT THERE",
+        "key.inHOUSE": "WWW",
+        "key.inROOM": "mystery",
+        "key.keyMADE": "letty-undiscovered",
+        "key.skyCONTENT": "<?php \n\nopenSky('LETTY IS OUT THERE');\ngetMy_WWW('mystery\\|letty-undiscovered');\n\nbigHeading(\"does anyone remember letty?\");\r\nleaf(\"who? who is letty?\");\r\n\n\ncloseSky();\n\n ?>",
+        "meta.DATA": {
+            "chest.UNIX": 1775693764,
+            "gaia.DATE": "2026\/04\/08",
+            "gaia.TIME": "08:16:04PM",
+            "gaia.TZONE": "America\/New_York",
+            "acting.SYSTEM": "WWW",
+            "acting.CTRLS": "WWW",
+            "acting.DOLLY": "WWW",
+            "acting.VIEWPORT": "__UNDISCLOSED__"
+        }
+    },
+    "cUID-F1700DB298C26EBF": {
+        "tps.REF": "tUID-20260408.65A46C",
+        "openSky.TITLE": "LETTY IS OUT THERE",
+        "key.inHOUSE": "WWW",
+        "key.inROOM": "mystery",
+        "key.keyMADE": "letty-undiscovered",
+        "key.skyCONTENT": "<?php \n\nopenSky('LETTY IS OUT THERE');\ngetMy_WWW('mystery\\|letty-undiscovered');\n\nbigHeading(\"does anyone remember letty?\");\r\nleaf(\"who? who is letty?\");\r\n\n\ncloseSky();\n\n ?>",
+        "meta.DATA": {
+            "chest.UNIX": 1775693898,
+            "gaia.DATE": "2026\/04\/08",
+            "gaia.TIME": "08:18:18PM",
+            "gaia.TZONE": "America\/New_York",
+            "acting.SYSTEM": "WWW",
+            "acting.CTRLS": "WWW",
+            "acting.DOLLY": "WWW",
+            "acting.VIEWPORT": "__UNDISCLOSED__"
+        }
+    },
+    "cUID-7C00DDEDF8D0B61E": {
+        "tps.REF": "tUID-20260408.EA93E5",
+        "openSky.TITLE": "LETTY IS OUT THERE",
+        "key.inHOUSE": "WWW",
+        "key.inROOM": "mystery",
+        "key.keyMADE": "letty-undiscovered",
+        "key.skyCONTENT": "<?php \n\nopenSky('LETTY IS OUT THERE');\ngetMy_WWW('mystery\\|letty-undiscovered');\n\nbigHeading(\"does anyone remember letty?\");\r\nleaf(\"who? who is letty?\");\r\n\n\ncloseSky();\n\n ?>",
+        "meta.DATA": {
+            "chest.UNIX": 1775693976,
+            "gaia.DATE": "2026\/04\/08",
+            "gaia.TIME": "08:19:36PM",
+            "gaia.TZONE": "America\/New_York",
+            "acting.SYSTEM": "WWW",
+            "acting.CTRLS": "WWW",
+            "acting.DOLLY": "WWW",
+            "acting.VIEWPORT": "__UNDISCLOSED__"
+        }
+    },
+    "cUID-C03AEE7FE39469D1": {
+        "tps.REF": "tUID-20260408.6E8D53",
+        "openSky.TITLE": "LETTY IS OUT THERE",
+        "key.inHOUSE": "WWW",
+        "key.inROOM": "mystery",
+        "key.keyMADE": "letty-undiscovered",
+        "key.skyCONTENT": "<?php \n\nopenSky('LETTY IS OUT THERE');\ngetMy_WWW('mystery\\|letty-undiscovered');\n\nbigHeading(\"does anyone remember letty?\");\r\nleaf(\"who? who is letty?\");\r\n\n\ncloseSky();\n\n ?>",
+        "meta.DATA": {
+            "chest.UNIX": 1775693987,
+            "gaia.DATE": "2026\/04\/08",
+            "gaia.TIME": "08:19:47PM",
+            "gaia.TZONE": "America\/New_York",
+            "acting.SYSTEM": "WWW",
+            "acting.CTRLS": "WWW",
+            "acting.DOLLY": "WWW",
+            "acting.VIEWPORT": "__UNDISCLOSED__"
+        }
+    }
+}

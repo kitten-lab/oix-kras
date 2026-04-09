@@ -7,6 +7,8 @@ $GLOBALS['SITE_SLUG'] = "WWW";
 
 $GLOBALS[$site]['room'] = [
                     ["name" => "archived"],
+                    ["name" => "mystery"],
+                    ["name" => "programs"],
                     ];
 $GLOBALS[$site]['key'] = "home"; 
 
