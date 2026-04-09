@@ -1,5 +1,7 @@
-<?php $config = $GLOBALS['mailroomBasic_List'] ?? [];
-require __DIR__ . '/../../incl/inits/nameSelf.php';
+<?php 
+require __DIR__ . '/../../systems/rehydrateSelf.php';
+
+$config = $GLOBALS['mailroomBasic_List'] ?? [];
 $posts = json_decode(file_get_contents($GLOBALS['sonar'] . 'd/mailRoom/' . $sys . '/data.json'), true);
 
 if (!$posts) {

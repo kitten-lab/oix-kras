@@ -1,5 +1,5 @@
 <?php 
-require __DIR__ . '/../../incl/inits/nameSelf.php';
+require __DIR__ . '/../../systems/rehydrateSelf.php';
 $config = $GLOBALS['plogBasicList'] ?? []; 
 
 $path = $sonar . 'd/plogBasic/' . $sys . '/' . $dom . '/data.json';

@@ -1,6 +1,7 @@
 
 <?php 
-require __DIR__ . '/../../incl/inits/nameSelf.php';
+require __DIR__ . '/../../systems/rehydrateSelf.php';
+
 $config = $GLOBALS['plogBasicAdd'] ?? []; 
 ?>
 <form method="POST" action="">

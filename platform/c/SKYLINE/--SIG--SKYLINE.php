@@ -11,6 +11,7 @@ $GLOBALS['SITE_SLUG'] = "SKYLINE";
 
 $GLOBALS[$site]['room'] = [
                     ["name" => "PUBLIC_OFFICE"],
+                    ["name" => "REGISTRAR"],
                     ["name" => "COMMS"],
                     ["name" => "window"]]; 
 $GLOBALS[$site]['key'] = "home"; 

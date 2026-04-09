@@ -1,6 +1,8 @@
 
-<?php $config = $venRegistrar ?? []; 
-require __DIR__ . '/../../incl/inits/nameSelf.php';
+<?php 
+require __DIR__ . '/../../systems/rehydrateSelf.php';
+
+$config = $venRegistrar ?? []; 
 
 ?>
 

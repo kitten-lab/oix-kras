@@ -1,6 +1,7 @@
 
 <?php 
-require __DIR__ . '/../../incl/inits/nameSelf.php';
+require __DIR__ . '/../../systems/rehydrateSelf.php';
+
 include __DIR__ . '/../parsedown/Parsedown.php';
 
 $Parsedown = new Parsedown();

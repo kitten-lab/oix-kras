@@ -1,6 +1,6 @@
 <?php
+require __DIR__ . '/../../systems/rehydrateSelf.php';
 
-require __DIR__ . '/../../incl/inits/nameSelf.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $openSky = $_POST['openSky'];
     $house = $_POST['house'];
@@ -31,7 +31,7 @@ $page_content = ob_get_contents();
     // CHANGE PER TOOL //
   $chestNOTE = $_POST['openSky']; 
   $chestCONTENT = "rooms/" . $house . "/" . $room . "/" . $key; 
-  $betACTION = "KEY MADE: keyMaker";
+  $betACTION = "KEY MADE: " $house . ' / ' . $key;
   $reportHEAD = "keyMaker|makeKey";
 
     // DO NOT TOUCHY //

@@ -1,6 +1,6 @@
 <?php
+require __DIR__ . '/../../systems/rehydrateSelf.php';
 
-require __DIR__ . '/../../incl/inits/nameSelf.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // CHANGE PER TOOL //

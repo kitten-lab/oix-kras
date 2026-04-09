@@ -1,3 +1,3 @@
 <?php
 
-// MIGRATING...
+// MIGRATED
