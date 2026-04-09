@@ -11,7 +11,6 @@ function nameSelf($text) {
     $GLOBALS['mod'] = $text;
 }
 
-
 function declareSelf($sys,$dom,$mod) { 
     $GLOBALS['sys'] = $sys;
     $GLOBALS['dom'] = $dom;

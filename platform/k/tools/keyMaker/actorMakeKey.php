@@ -85,10 +85,10 @@ $tpsDATA = buildTPS($unix,$ms,$tzone);
 // OKAY LETS MAKE A CHESTER CRATE OF THIS BIT OF STUFFS! 
 // ============================================================================
 
-    $dir = $GLOBALS['sonar'] . 'm/rooms/' . $house . '/' . $room . '/backups/';
+    $dir = $GLOBALS['sonar'] . 'd/rooms/' . $house . '/' . $room . '/';
    if (!is_dir($dir)) { mkdir($dir, 0775, true); }   
 
-  $file = $dir . '/' . $key. '.json';
+  $file = $dir . '/' . $key. '_data.json';
 
   $json = file_get_contents($file);
   $entries = json_decode($json, true);
