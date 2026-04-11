@@ -1,0 +1,4 @@
+<?php 
+openSky("HELLO");
+    ;
+closeSky();

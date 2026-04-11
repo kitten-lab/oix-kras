@@ -10,10 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $POST__DOM =         $_POST['POST__DOM'];
     $POST__MOD =         $_POST['POST__MOD'];
     $POST__PV =          $_GET['pv'] ?? '__UNDISCLOSED__';
-    $POST__LOVERS_MARK = $_POST['LOVERS_MARK'];
-    $POST__ACTING__AS =  $_POST['ACTING__AS'];
     $POST__TIMEZONE =    $_POST['POST__TZ'];
 
+    $POST__LOVERS_MARK = $_POST['LOVERS_MARK'];
+    $POST__ACTING__AS =  $_POST['ACTING__AS'];
+    
     $GEN__WORLD_NAME =   $_POST['GEN__WORLD_NAME'];
     $GEN__WORLD_SYS =    $_POST['GEN__WORLD_SYS'];
     $GEN__WORLD_DOM =    $_POST['GEN__WORLD_DOM'];

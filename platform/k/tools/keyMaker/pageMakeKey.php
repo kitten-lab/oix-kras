@@ -7,39 +7,39 @@ $config = $GLOBALS['keyMaker_MakeKey'] ?? [];
 <form method="POST" action="">
 
     <input 
-        name="openSky" 
-        class="makeKey_openSky" 
-        placeholder="<?= $config['openSky_Title'] ?? 'Title bar title to open sky'; ?>" 
+        name="GEN__KEY_OPENSKY" 
+        class="GEN__KEY_OPENSKY" 
+        placeholder="GEN__KEY_OPENSKY"  
         required>
     <br>
 
     <input 
-    class="house" 
-    name="house" 
-    placeholder="<?= $config['houseName'] ?? 'houseName'; ?>" 
+    class="GEN__KEY_FOR_HOUSE" 
+    name="GEN__KEY_FOR_HOUSE" 
+    placeholder="GEN__KEY_FOR_HOUSE" 
         required>
     <br>
 
     <input 
-    class="room" 
-    name="room" 
-    placeholder="<?= $config['roomName'] ?? 'roomName'; ?>" 
+    class="GEN__KEY_FOR_ROOM" 
+    name="GEN__KEY_FOR_ROOM" 
+    placeholder="GEN__KEY_FOR_ROOM" 
         required>
     <br>
 
 
     <input 
-    class="key" 
-    name="key" 
-    placeholder="<?= $config['keyName'] ?? 'keyName'; ?>" 
+    class="GEN__KEY_NAME" 
+    name="GEN__KEY_NAME" 
+    placeholder="GEN__KEY_NAME" 
         required>
     <br>
 
     <textarea 
-    rows="10" 
-        name="skytext" 
-        class="skytext" 
-        placeholder="<?= $config['skyWrite_leafText'] ?? 'write in sky'; ?>" 
+    rows="10" cols="40" 
+        name="GEN__KEY_SKYBODY" 
+        class="GEN__KEY_SKYBODY" 
+        placeholder="GEN__KEY_SKYBODY" 
     required>
     </textarea>
     <br>
@@ -50,10 +50,10 @@ $config = $GLOBALS['keyMaker_MakeKey'] ?? [];
     <?= $config['Submit_Button'] ?? 'Submit'; ?>
   </button> 
 
-  <input type='hidden' name='betSys' value='<?= $sys; ?>''/> 
-  <input type='hidden' name='betDom' value='<?= $dom; ?>''/> 
-  <input type="hidden" name="betTZone" id="tz-input">
-  <input type='hidden' name='betMod' value='<?= $mod; ?>'/> 
+  <input type='hidden' name='POST__SYS' value='<?= $sys ?>'/> 
+  <input type='hidden' name='POST__DOM' value='<?= $dom ?>'/> 
+  <input type='hidden' name='POST__MOD' value='<?= $mod ?>'/> 
+  <input type="hidden" name="POST__TZ" id="tz-input">
 
   <span class="plogBasic_postMsg">
 
