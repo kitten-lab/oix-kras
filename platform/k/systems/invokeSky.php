@@ -11,6 +11,11 @@ function nameSelf($text) {
     $GLOBALS['mod'] = $text;
 }
 
+
+function nameRoomKey($text) { 
+    $GLOBALS['roomkey'] = $text;
+}
+
 function declareSelf($sys,$dom,$mod) { 
     $GLOBALS['sys'] = $sys;
     $GLOBALS['dom'] = $dom;

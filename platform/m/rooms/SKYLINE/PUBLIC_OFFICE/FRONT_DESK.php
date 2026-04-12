@@ -1,6 +1,7 @@
 <?php
 openSky("SKYLINE FRONT DESK");
-nameSelf("CLERK");
+declareSelf("SKYLINE", "PUBLIC OFFICE", "CLERK");
+nameRoomKey("FRONT DESK");
 bigHeading("Welcome to SKYLINE On INTERA.");
 medHeading("THANK YOU FOR CHECKING IN.");
 

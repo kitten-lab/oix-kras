@@ -1,6 +1,6 @@
 <?php
 openSky($sys . '.' . $dom);
-
+nameSelf("SDK-808");
 section($right,'color:gray','');
 
 bigHeading("MAILROOM OUTBOX");

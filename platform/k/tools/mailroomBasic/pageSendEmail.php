@@ -15,49 +15,33 @@ $config = $GLOBALS['mailroomBasic'] ?? [];
 
 
 <form method="POST" action="">
-<div class="emailBasic_flexRow">
-  <span class="emailBasic_formEl">
 
-    <input name="to_betMod"
-        class="emailBasic" to_
-        placeholder="<?= $config['toModLine'] ?? 'MOD'; ?>" 
+    <input name="TO__MOD"
+        placeholder="TO__MOD" 
         required>
-  </span>
-  <span class="emailBasic_formEl">
 
-    <input name="to_betDom" 
-        class="emailBasic" 
-        placeholder="<?= $config['toDomLine'] ?? 'DOM'; ?>" 
+    <input name="TO__DOM" 
+        placeholder="TO__DOM" 
         required>
-  </span><span class="emailBasic_formEl">
+        
 
-    <input name="to_betSys"
-        class="emailBasic" to_
-        placeholder="<?= $config['toModLine'] ?? 'SYS'; ?>" 
+    <input name="TO__SYS"
+        placeholder="TO__SYS" 
         required>
-  </span>
-  </div>
-  <span class="blogBasic_formEl">
 
-    <input name="log_leafTopic" 
-        placeholder="<?= $config['subjectLine'] ?? 'Subject'; ?>" 
+    <input name="POST__MAIL_TOPIC" 
+        placeholder="POST__MAIL_TOPIC" 
         required>
-  </span>
-    <br>
-  <span class="blogBasic_formEl">
-    <textarea name="log_leafText" 
-    placeholder="<?= $config['placeholderBody'] ?? 'Body'; ?>" 
+        
+    <textarea name="POST__MAIL_TEXT" 
+    placeholder="POST__MAIL_TEXT" 
     required></textarea>
-  </span>
-    <br>
+  
 
-  <input type='hidden' name='betSys' value='<?php echo "$sys";?>'/> 
-  <input type='hidden' name='betDom' value='<?php echo "$dom";?>'/> 
-  <input type='hidden' name='betMod' value='<?php echo "$mod";?>'/> 
-  <input type='hidden' name='from_betSys' value='<?php echo "$sys";?>'/> 
-  <input type='hidden' name='from_betDom' value='<?php echo "$dom";?>'/> 
-  <input type='hidden' name='from_betMod' value='<?php echo "$mod";?>'/> 
-  <input type="hidden" name="betTZone" id="tz-input">
+  <input type='hidden' name='POST__SYS' value='<?php echo "$sys";?>'/> 
+  <input type='hidden' name='POST__DOM' value='<?php echo "$dom";?>'/> 
+  <input type='hidden' name='POST__MOD' value='<?php echo "$mod";?>'/> 
+  <input type="hidden" name="POST__TZ" id="tz-input">
 
   <button type="submit">Submit</button> 
 
