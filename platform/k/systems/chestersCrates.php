@@ -527,24 +527,43 @@ $cUID = $GLOBALS['cUID'];
             $json5 = file_get_contents($impact_catalog);
             $impact = json_decode($json5, true);
 
+    
     if (!$impact) {
         $impact = [
-                'name' => $tag,
-                'gravity' => 0,
-                'tps_metadata' => [],
+            'name' => $tag,
+            'gravity' => 0,
+            'tps_metadata' => []
         ];
-        
     }
 
-            if (!isset($impact[$tag][$entity])){
-                $impact[$tag][$entity] = [
-                ];
-            }
-                $impact['gravity']++;
+    if (!isset($impact['contents'][$object]))
+    $impact['contents'][$object] = [
+            'gravity' => 0,
+            'tps_metadata' => []
+            ];
 
+    if (!isset($impact['contents'][$object]['bin'][$entity]))
+    $impact['contents'][$object]['bin'][$entity] = [
+            'gravity' => 0,
+            'tps_metadata' => [],
+            ];
 
-                $impact[$tag][$entity]['weight']++;
-                $impact[$tag][$entity]['bin'][$object]++;
+    if (!isset($impact['tps_metadata']['added']))
+        $impact['tps_metadata']['added'] = ['cUID' => $cUID, 'unix' => time()];
+
+    if (!isset($impact['contents'][$object]['tps_metadata']['added']))
+        $impact['contents'][$object]['tps_metadata']['added']= ['cUID' => $cUID, 'unix' => time()];
+
+    if (!isset($impact['contents'][$object]['bin'][$entity]['tps_metadata']['added']))
+        $impact['contents'][$object]['bin'][$entity]['tps_metadata']['added'] = ['cUID' => $cUID, 'unix' => time()];
+        
+        $impact['tps_metadata']['updated'] = ['cUID' => $cUID, 'unix' => time()];
+        $impact['contents'][$object]['tps_metadata']['updated']= ['cUID' => $cUID, 'unix' => time()];
+        $impact['contents'][$object]['bin'][$entity]['tps_metadata']['updated'] = ['cUID' => $cUID, 'unix' => time()];
+
+    $impact['contents'][$object]['bin'][$entity]['gravity']++;
+    $impact['contents'][$object]['gravity']++;
+    $impact['gravity']++;
 
         file_put_contents($impact_catalog, json_encode($impact, JSON_PRETTY_PRINT));
 

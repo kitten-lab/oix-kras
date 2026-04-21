@@ -30,10 +30,10 @@ catalogUNIX($tpstime, $cUID, $sha_env);
 $tpsDATA = buildTPS($tpstime, $ms, $tzone, $event_time);
 
 $router_1 = ROUTE('d', $sha_env);
-$TRACKER_KEEPER = $router_1 . '_timeKEEPER/tps_reports/' . $syear . '/' . substr($tpstime, 0, 4) . '-block/';
+$TRACKER_KEEPER = $router_1 . '_timeKEEPER/tps_reports/' . $syear . '/' . substr($tpstime, 0, 6) . '-block/';
     aleph($TRACKER_KEEPER);
   
-  $tpsReport = $TRACKER_KEEPER . '/' . substr($tpstime, 0, 7) . '-.tps.json';
+  $tpsReport = $TRACKER_KEEPER . '/' . substr($tpstime, 0, 6) . '-.tps.json';
   $tpsjson = file_get_contents($tpsReport);
   $tpss = json_decode($tpsjson, true);
 
