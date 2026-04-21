@@ -20,7 +20,7 @@ $tUID    = SKY_GET_tUID($event_time);
 //=============================================================================
 
 chestersCRATES($sha_env, $a, $cUID, $tpstime, $event_time, $tUID, $timezone);
-charliesTHREADS($sha_env);
+charliesTHREADS($sha_env, $tpstime);
 catalogUNIX($tpstime, $cUID, $sha_env);
 
 //=============================================================================

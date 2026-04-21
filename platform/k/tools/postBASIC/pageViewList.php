@@ -7,27 +7,32 @@ $FIG = getFIG("postBasic", "ViewList");
 
 
 
-$SHADOW_PROD_TOGGLE = SHADOW_PROD_ENV(false);
-$ROUTE__LINE = ROUTE('d', $SHADOW_PROD_TOGGLE);
+$SHADOW_PROD_TOGGLE = SHADOW_PROD_ENV(true);
+$router_1 = ROUTE('d', $SHADOW_PROD_TOGGLE);
 
-$ROUTE = $ROUTE__LINE . $GLOBALS['TOOL']['NAME'] . '/' . $GLOBALS[$SITE]['SYS_SLUG'] . '/' . $GLOBALS[$SITE]['DOM_SLUG'] . '/';
-  $CHEST = $ROUTE . '/' . $GLOBALS[$SITE]['ROOM_SLUG'] . '.data.json';
+$route = $router_1 . $GLOBALS[$SITE]['SYS_SLUG'] . '/';
+    $CHEST = $route . $GLOBALS[$SITE]['DOM_SLUG'] . '-' . $GLOBALS[$SITE]['ROOM_SLUG'] . '.post.json';    
   
 
 $CHEST_THINGS = json_decode(file_get_contents($CHEST), true);
 usort($CHEST_THINGS, function($a, $b) {
-    return $b['TPS']['event_unix'] <=> $a['TPS']['event_unix'];
+    return $b['tps']['event_unix'] <=> $a['tps']['event_unix'];
 });
 
+foreach ($CHEST_THINGS as $TIMBER => $contents) {
+  $unix = $contents['tps']['event_unix'];
 
-foreach ($CHEST_THINGS as $TIMBER) {
-  $content = $TIMBER['payload']['timber'];
-  $unix = $TIMBER['TPS']['event_unix'];
     $tpsDT = new DateTime("@$unix");
             $tpsDT->setTimezone(new DateTimeZone("America/New_York"));
             $date = $tpsDT->format('Y-m-d h:i:sa');
-  echo "<div><a href='?w=" . $GLOBALS[$SITE]['ROOM_SLUG'] . '&id=' . $TIMBER['CUID'] . "'>";
-  echo $content['topic'] . "</a> posted by " . $TIMBER['route']['from']['mod'] . ' at ' . $date;
+  echo "<div><a href='?w=" . $GLOBALS[$SITE]['ROOM_SLUG'] . '&id=' . $TIMBER . "'>";
+  echo $contents['payload']['post']['topic'] . "</a> posted by " . $contents['import_env']['mod_slug'];
   echo "</div>";
+  foreach ($contents['tags'] as $nodea => $nodebs){
+        echo '#' . $nodea;
+    foreach ($nodebs as $nodeb => $nodec){
+        echo ',' . $nodeb;
+    }
+  }
 }
 ?>

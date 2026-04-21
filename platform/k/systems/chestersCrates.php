@@ -228,29 +228,33 @@ $TOOL = $GLOBALS['TOOL'];
 //==============================================================================================
 function catalogUNIX($UNIX,$cUID, $SHADOW_PROD_TOGGLE){
 
+
     $tpsDT = new DateTime("@$UNIX");
     $tpsDT->setTimezone(new DateTimeZone("UTC"));
     $year = (int)$tpsDT->format('x');
     $date = (int)$tpsDT->format('x-m-d');
 
+
+$SITE = $GLOBALS['SITE'];
+$MOD = $GLOBALS[$SITE]['MOD_SLUG'];
+
     //--## router settings ------- ##
 
     $ROUTE__LINE = ROUTE('d', $SHADOW_PROD_TOGGLE);
-    $ROUTE = $ROUTE__LINE . '/_timeKEEPER/lookup/by_tps/' . $year . '/' . substr($UNIX, 0, 4)  . '-block/';
+    $ROUTE = $ROUTE__LINE . '/_timeKEEPER/lookup/by_tps/' . $year . '/' . substr($UNIX, 0, 6)  . '-block/';
     if (!is_dir($ROUTE)) { mkdir($ROUTE, 0775, true); }   
 
-    $UNIX_CHEST = $ROUTE . substr($UNIX, 0, 4) . '.lookup.json';
+    $UNIX_CHEST = $ROUTE . substr($UNIX, 0, 6) . '.lookup.json';
     $json = file_get_contents($UNIX_CHEST);
     $payload = json_decode($json, true);
 
   //------## unix filler ------- ##
-    if (!is_array($payload[$UNIX])){
-        $payload[$UNIX][] = $cUID;
+    if (!$payload){
+        $payload ?? [];
     }
 
-    if (!in_array($cUID, $payload[$UNIX])){
-        $payload[$UNIX][] = $cUID;
-    }
+    if (!isset($payload[$UNIX][$MOD][$cUID])) $payload[$UNIX][$MOD][] = $cUID;
+    
 
   //--## fill that crate! ------- ##
     file_put_contents($UNIX_CHEST, json_encode($payload));
@@ -283,9 +287,11 @@ function charlieINDEX($sha_env, $group, $add, $level){
 }
 
 
-function chesterLOOKUP($sha_env, $add, $level,$level2,$level3){
+function chesterLOOKUP($tpstime, $sha_env, $add, $level,$level2,$level3){
     
 $SITE = $GLOBALS['SITE'];
+$MOD = $GLOBALS[$SITE]['MOD_SLUG'];
+$cUID = $GLOBALS['cUID'];
         foreach ($add as $entity => $objs){
         foreach ($objs as $objects => $tags){
         foreach ($tags as $tag){
@@ -301,18 +307,20 @@ $SITE = $GLOBALS['SITE'];
             $oc = [];
         }
 
-            
-            if (!isset($oc[$$level])){
-                $oc[$$level] = [];
-            }
-            if (!isset($oc[$$level][$$level2])){
-                $oc[$$level][$$level2] = [];
-            }
-            if (!isset($oc[$$level][$$level2][$$level3])){
-                $oc[$$level][$$level2][$$level3] = [];
-            }
 
-        $oc[$$level][$$level2][$$level3][$GLOBALS[$SITE]['MOD_SLUG']][] = $GLOBALS['cUID'];
+            if (!isset($oc[$$level]['gravity'])) $oc[$$level]['gravity'] ?? [];
+            $oc[$$level]['gravity']++;
+
+            if (!isset($oc[$$level][$$level2]['weight'])) $oc[$$level][$$level2]['weight'] ?? [];
+            $oc[$$level][$$level2]['weight']++;
+
+            if (!isset($oc[$$level][$$level2][$$level3]['weight'])) $oc[$$level][$$level2][$$level3]['weight'] ?? [];
+            $oc[$$level][$$level2][$$level3]['weight']++;
+            
+            if (!isset($oc[$$level][$$level2][$$level3]['reported_by'][$MOD][$tpstime][$cUID]))
+             $oc[$$level][$$level2][$$level3]['reported_by'][$MOD][$tpstime][] = $cUID;
+            
+
 
     file_put_contents($obj_catalog, json_encode($oc, JSON_PRETTY_PRINT));
 
@@ -322,19 +330,15 @@ $SITE = $GLOBALS['SITE'];
     
 
 }
-//--------------------------------------------------------------------------------
-function charliesTHREADS($sha_env){
-    
+
+
+function charlieTHREAD2($sha_env, $tpstime){
+
+
     $RAW_TAGS = $_POST['POST__TAGS'] ?? '';
     $router_1 = ROUTE('d', $sha_env);
     $add = tagSPLICER($RAW_TAGS);
 
-    charlieINDEX($sha_env, 'a-node', $add, 'entity');
-    charlieINDEX($sha_env, 'b-node', $add, 'objects');
-    charlieINDEX($sha_env, 'c-node', $add, 'tag');
-    chesterLOOKUP($sha_env, $add, 'entity','objects', 'tag');
-    chesterLOOKUP($sha_env, $add, 'objects', 'entity', 'tag');
-    chesterLOOKUP($sha_env, $add, 'tag', 'entity', 'objects');
 
     foreach ($add as $entity => $objs){
         foreach ($objs as $object => $tags){
@@ -347,25 +351,149 @@ function charliesTHREADS($sha_env){
             $tc = json_decode($json1, true);
 
         if (!$tc) {
+            $tc = [];
+        }
+
+        if (!in_array($entity, $tc))
             $tc = [
                 'name' => $entity,
                 'gravity' => 0,
                 'alias' => [],
-                'notes' => []
+                'notes' => [],
+                'date_added' => [
+                    'unix' => time(),
+                    'cUID' => $GLOBALS['cUID']],
+                'earliest_mention' => [
+                    'event_unix' => $tpstime,
+                    'cUID' => $GLOBALS['cUID'],
+                ],
+                'last_mention' => [
+                    'ingest_unix' => time(),
+                    'event_unix' => $tpstime,
+                    'cUID' => $GLOBALS['cUID'],
+                ],
             ];
-        }
+        
 
-            if (!isset($tc)){
-                $tc = [
-                    $object => [
-                        'weight' => 0
-                    ]
+
+            if (!isset($tc[$object]))
+                $tc[$object]= [
+                    
+                'weight' => 0,
+                'date_added' => [
+                    'unix' => time(),
+                    'cUID' => $GLOBALS['cUID']],
+                'earliest_mention' => [
+                    'event_unix' => $tpstime,
+                    'cUID' => $GLOBALS['cUID'],
+                ],
+                'last_mention' => [
+                    'ingest_unix' => time(),
+                    'event_unix' => $tpstime,
+                    'cUID' => $GLOBALS['cUID'],
+                ],
+                'bin' => []
+                    
                 ];
-            }
+            
+
+
+        if (!is_array($tc[$object]['bin'][$tag]))
+            $tc[$object]['bin'][$tag] ?? [];
+        
+            
+
+            if (!isset( $tc[$object]['bin'][$tag]))
+                $tc[$object]['bin'][$tag] = [
+                    
+                'weight' => 0,
+            
+                'date_added' => [
+                    'unix' => time(),
+                    'cUID' => $GLOBALS['cUID']],
+                'earliest_mention' => [
+                    'event_unix' => $tpstime,
+                    'cUID' => $GLOBALS['cUID'],
+                ],
+                'last_mention' => [
+                    'ingest_unix' => time(),
+                    'event_unix' => $tpstime,
+                    'cUID' => $GLOBALS['cUID']
+                ],
+                    
+                ];
+            
+
+
+
+        if (!isset($tc['last_mention']['ingest_unix'][$tpstime]))
+        $tc['last_mention']['ingest_unix'] = $tpstime;
+        if (!isset($tc['last_mention']['event_unix']))
+        $tc['last_mention']['event_unix'] = time();
 
                 $tc[$object]['weight']++;
                 $tc['gravity']++;
-                $tc[$object]['bin'][$tag]++;
+                $tc[$object]['bin'][$tag]['weight']++;
+                
+    file_put_contents($MTAG_CHEST, json_encode($tc, JSON_PRETTY_PRINT));
+
+            }
+        }
+    }
+
+}
+
+//--------------------------------------------------------------------------------
+function charliesTHREADS($sha_env, $tpstime){
+    
+    $RAW_TAGS = $_POST['POST__TAGS'] ?? '';
+    $router_1 = ROUTE('d', $sha_env);
+    $add = tagSPLICER($RAW_TAGS);
+
+    charlieINDEX($sha_env, 'a-node', $add, 'entity');
+    charlieINDEX($sha_env, 'b-node', $add, 'objects');
+    charlieINDEX($sha_env, 'c-node', $add, 'tag');
+    chesterLOOKUP($tpstime, $sha_env, $add, 'entity','objects', 'tag');
+    chesterLOOKUP($tpstime, $sha_env, $add, 'objects', 'entity', 'tag');
+    chesterLOOKUP($tpstime, $sha_env, $add, 'tag', 'entity', 'objects');
+
+
+    foreach ($add as $entity => $objs){
+        foreach ($objs as $object => $tags){
+            foreach ($tags as $tag){
+
+        $catalog_rt = $router_1 . '_trackerKEEPER/tags/by_entity/';
+            aleph($catalog_rt);
+            $MTAG_CHEST = $catalog_rt . $entity . '.entity.json';
+            $json1 = file_get_contents($MTAG_CHEST);
+            $tc = json_decode($json1, true);
+
+        
+    if (!$tc) {
+        $tc = [
+                'name' => $entity,
+                'gravity' => 0,
+                'tps_metadata' => [],
+        ];
+        
+    }
+
+
+    if (!isset($tc['contents'][$object]))
+    $tc['contents'][$object] = [
+                'gravity' => 0,
+                'tps_metadata' => [],];
+
+    if (!isset($tc['contents'][$object]['bin'][$tag]))
+    $tc['contents'][$object]['bin'][$tag] = [
+                'gravity' => 0,
+                'tps_metadata' => [],];
+
+    $tc['contents'][$object]['bin'][$tag]['gravity']++;
+    $tc['contents'][$object]['gravity']++;
+    $tc['gravity']++;
+
+
     file_put_contents($MTAG_CHEST, json_encode($tc, JSON_PRETTY_PRINT));
 
             }
@@ -389,6 +517,7 @@ function charliesTHREADS($sha_env){
         $impact = [
                 'name' => $tag,
                 'gravity' => 0,
+                'tps_metadata' => [],
         ];
         
     }
@@ -423,6 +552,7 @@ function charliesTHREADS($sha_env){
         $impac2 = [
                 'name' => $object,
                 'gravity' => 0,
+                'tps_metadata' => [],
         ];
         
     }

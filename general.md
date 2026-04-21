@@ -2,4 +2,10 @@
 
 media* television > TDAC, LOST, Alias;
 
-media>television
+THIS > THAT
+
+! for namespace
+- !collections
+- !event
+- !person
+- 
