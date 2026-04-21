@@ -14,14 +14,16 @@ function aleph($ROUTE){
 }
 
 function SKY_GET_tUID($event_time){
-    $tUID = $event_time . '.tps';
+    $tUID = $event_time  . '.tps';
         return $tUID;
 }
 
 
 function SKY_GET_cUID($event_time){
-    $cUID = 'crate.' . strtoupper(bin2hex(random_bytes(8)));
+    $GLOBALS['cUID'] = 'crate.' . strtoupper(bin2hex(random_bytes(8)));
+        $cUID = $GLOBALS['cUID'];
         return $cUID;
+
 }
 
 //==============================================================================================
@@ -147,7 +149,11 @@ $TAGS = tagSPLICER($RAW_TAGS);
         "payload" => json_payload(),
         "route" => json_route(),
         "tags" => $TAGS,
-        "raw_tags" => $RAW_TAGS,
+        "tags_metadata" => [
+            "raw_tags" => $RAW_TAGS,
+            "tag_parser" => 'charlieTHREADS',
+            "parser_version" => 1
+        ],
         "notes" => [],
         "import_env" => json_environment(),
         "ref_material" => json_origin(),
@@ -163,20 +169,26 @@ $TAGS = tagSPLICER($RAW_TAGS);
 function chestersCRATES($sha_env, $a, $cUID, $unix, $event_time, $tUID, $timezone){
     $RAW_TAGS = $_POST['POST__TAGS'] ?? '';
 
-$route = ROUTE('d', $sha_env);
+
+    $tpsDT = new DateTime("@$unix");
+    $tpsDT->setTimezone(new DateTimeZone("UTC"));
+    $year = (int)$tpsDT->format('x');
+    $date = (int)$tpsDT->format('x-m-d');
+
+    $route = ROUTE('d', $sha_env);
     $BUILD_CHEST = buildCHEST($RAW_TAGS, $cUID, $unix, $event_time, $tUID, $timezone);
 
     $router_1 = $route . $a['SYS_SLUG'] . '/';
      aleph($router_1);
 
-    $router_2 = $route . 'trackerKEEPER/by_event/' . $syear . '/';
+    $router_2 = $route . '_crateKEEPER/search_by_crate/sort_by_event/' . $tpsDT->format('Y') . '/';
      aleph($router_2);
 
-    $router_3 = $route . 'trackerKEEPER/by_ingest/' . date('Y') . '/';
+    $router_3 = $route . '_crateKEEPER/search_by_crate/sort_by_ingest/' . date('Y') . '/';
      aleph($router_3);
 
     $CHEST = $router_1 . $a['DOM_SLUG'] . '-' . $a['ROOM_SLUG'] . '.post.json';    
-    $ECHO_CHEST = $router_2 . $sdate . '.event.echo.json';
+    $ECHO_CHEST = $router_2 . $tpsDT->format('Y-m-d') . '.event.echo.json';
     $IM_ECHO_CHEST = $router_3 . date('Y-m-d') . '.ingest.echo.json';
 
      $json = file_get_contents($CHEST);
@@ -198,7 +210,7 @@ $route = ROUTE('d', $sha_env);
     
     file_put_contents($CHEST, json_encode($CHEST_THINGS, JSON_PRETTY_PRINT));
     file_put_contents($ECHO_CHEST, json_encode($ECHO_CHEST_THINGS, JSON_PRETTY_PRINT));
-    file_put_contents($IM_ECHO_CHEST, json_encode($ECHO_CHEST_THINGS, JSON_PRETTY_PRINT));
+    file_put_contents($IM_ECHO_CHEST, json_encode($IM_ECHO_CHEST_THINGS, JSON_PRETTY_PRINT));
 
 }
 //==============================================================================================
@@ -216,13 +228,18 @@ $TOOL = $GLOBALS['TOOL'];
 //==============================================================================================
 function catalogUNIX($UNIX,$cUID, $SHADOW_PROD_TOGGLE){
 
+    $tpsDT = new DateTime("@$UNIX");
+    $tpsDT->setTimezone(new DateTimeZone("UTC"));
+    $year = (int)$tpsDT->format('x');
+    $date = (int)$tpsDT->format('x-m-d');
+
     //--## router settings ------- ##
 
     $ROUTE__LINE = ROUTE('d', $SHADOW_PROD_TOGGLE);
-    $ROUTE = $ROUTE__LINE . '/trackerKEEPER/unix_quick_lookup/' . date('Y') . '/' . date('m') . '/';
+    $ROUTE = $ROUTE__LINE . '/_timeKEEPER/lookup/by_tps/' . $year . '/' . substr($UNIX, 0, 4)  . '-block/';
     if (!is_dir($ROUTE)) { mkdir($ROUTE, 0775, true); }   
 
-    $UNIX_CHEST = $ROUTE . date('Y-m-d') . '.quicklookup.json';
+    $UNIX_CHEST = $ROUTE . substr($UNIX, 0, 4) . '.lookup.json';
     $json = file_get_contents($UNIX_CHEST);
     $payload = json_decode($json, true);
 
@@ -243,7 +260,7 @@ function catalogUNIX($UNIX,$cUID, $SHADOW_PROD_TOGGLE){
 function charlieINDEX($sha_env, $group, $add, $level){
 
     $router_1 = ROUTE('d', $sha_env);
-        $catalog_rt = $router_1 . 'catalog/';
+        $catalog_rt = $router_1 . '_charlieCATALOG/tag_catalogs/';
           aleph($catalog_rt);
           $obj_catalog = $catalog_rt . $group. '.catalog.json';
           $oc = json_decode(file_get_contents($obj_catalog), true);
@@ -264,6 +281,35 @@ function charlieINDEX($sha_env, $group, $add, $level){
     file_put_contents($obj_catalog, json_encode($oc, JSON_PRETTY_PRINT));
 
 }
+
+
+function chesterLOOKUP($sha_env, $add, $level,$level2,$level3){
+    
+
+        foreach ($add as $entity => $objs){
+        foreach ($objs as $objects => $tags){
+        foreach ($tags as $tag){
+
+
+    $router_1 = ROUTE('d', $sha_env);
+        $catalog_rt = $router_1 . '_trackerKEEPER/lookup/by_tag/';
+          aleph($catalog_rt);
+          $obj_catalog = $catalog_rt . $$level . '.lookup.json';
+          $oc = json_decode(file_get_contents($obj_catalog), true);
+
+        if (!$oc) {
+            $oc = [];
+        }
+            $oc[$$level][$$level2][$$level3][] = $GLOBALS['cUID'];
+
+    file_put_contents($obj_catalog, json_encode($oc, JSON_PRETTY_PRINT));
+
+        }
+        }
+        }
+    
+
+}
 //--------------------------------------------------------------------------------
 function charliesTHREADS($sha_env){
     
@@ -271,40 +317,49 @@ function charliesTHREADS($sha_env){
     $router_1 = ROUTE('d', $sha_env);
     $add = tagSPLICER($RAW_TAGS);
 
-    charlieINDEX($sha_env, 'a-node', $add, 'entities');
+    charlieINDEX($sha_env, 'a-node', $add, 'entity');
     charlieINDEX($sha_env, 'b-node', $add, 'objects');
     charlieINDEX($sha_env, 'c-node', $add, 'tag');
+    chesterLOOKUP($sha_env, $add, 'entity','objects', 'tag');
+    chesterLOOKUP($sha_env, $add, 'objects', 'entity', 'tag');
+    chesterLOOKUP($sha_env, $add, 'tag', 'entity', 'objects');
 
     foreach ($add as $entity => $objs){
+        foreach ($objs as $object => $tags){
+            foreach ($tags as $tag){
 
-        $catalog_rt = $router_1 . 'catalog/by_aspect/';
+        $catalog_rt = $router_1 . '_trackerKEEPER/tags/by_entity/';
             aleph($catalog_rt);
-            $MTAG_CHEST = $catalog_rt . $entity . '.aspect.json';
+            $MTAG_CHEST = $catalog_rt . $entity . '.entity.json';
             $json1 = file_get_contents($MTAG_CHEST);
             $tc = json_decode($json1, true);
 
         if (!$tc) {
-            $tc[$entity] = [
-                'count' => 0
+            $tc = [
+                'name' => $entity,
+                'gravity' => 0,
+                'alias' => [],
+                'notes' => []
             ];
         }
 
-        foreach ($objs as $object => $tags){
-            if (!isset($tc[$entity]['has'][$object])){
-                $tc[$entity]['has'][$object] = [
-                    'weight' => 0
+            if (!isset($tc)){
+                $tc = [
+                    $object => [
+                        'weight' => 0
+                    ]
                 ];
             }
 
-            foreach ($tags as $tag){
-                $tc[$entity]['count']++;
-                $tc[$entity]['has'][$object]['weight']++;
-                $tc[$entity]['has'][$object]['aspects'][$tag]++;
+                $tc[$object]['weight']++;
+                $tc['gravity']++;
+                $tc[$object]['bin'][$tag]++;
+    file_put_contents($MTAG_CHEST, json_encode($tc, JSON_PRETTY_PRINT));
+
             }
         }
     }
 
-    file_put_contents($MTAG_CHEST, json_encode($tc, JSON_PRETTY_PRINT));
 
 
     foreach ($add as $entity => $objs){
@@ -312,25 +367,29 @@ function charliesTHREADS($sha_env){
             foreach ($tags as $tag){
 
 
-    $catalog_rt = $router_1 . 'catalog/by_impact/';
+    $catalog_rt = $router_1 . '_trackerKEEPER/tags/by_relations/';
             aleph($catalog_rt);
-            $impact_catalog = $catalog_rt . $tag . '.impact.json';
+            $impact_catalog = $catalog_rt . $tag . '.relations.json';
             $json5 = file_get_contents($impact_catalog);
             $impact = json_decode($json5, true);
 
     if (!$impact) {
-        $impact[$tag]['count'] = 0;
+        $impact = [
+                'name' => $tag,
+                'gravity' => 0,
+        ];
         
     }
 
-            if (!isset($impact[$tag]['impacted_by'][$object])){
-                $impact[$tag]['impacted_by'][$object] = [];
+            if (!isset($impact[$tag][$entity])){
+                $impact[$tag][$entity] = [
+                ];
             }
-                $impact[$tag]['count']++;
+                $impact['gravity']++;
 
 
-                $impact[$tag]['impacted_by'][$object]['weight']++;
-                $impact[$tag]['impacted_by'][$object]['of'][$entity]++;
+                $impact[$tag][$entity]['weight']++;
+                $impact[$tag][$entity]['bin'][$object]++;
 
         file_put_contents($impact_catalog, json_encode($impact, JSON_PRETTY_PRINT));
 
@@ -343,25 +402,26 @@ function charliesTHREADS($sha_env){
             foreach ($tags as $tag){
 
 
-    $catalog_rt = $router_1 . 'catalog/by_insect/';
+    $catalog_rt = $router_1 . '_trackerKEEPER/tags/by_insect/';
             aleph($catalog_rt);
             $impact2_catalog = $catalog_rt . $object . '.insect.json';
             $json5 = file_get_contents($impact2_catalog);
             $impac2 = json_decode($json5, true);
-
     if (!$impac2) {
-        $impac2[$object]['count'] = 0;
+        $impac2 = [
+                'name' => $object,
+                'gravity' => 0,
+        ];
         
     }
-
-            if (!isset($impac2[$object]['in'][$entity])){
-                $impac2[$object]['in'][$entity] = [];
+            if (!isset($impac2[$object][$entity])){
+                $impac2[$object][$entity] = [];
             }
-                $impac2[$object]['count']++;
+                $impac2['gravity']++;
 
 
-                $impac2[$object]['in'][$entity]['weight']++;
-                $impac2[$object]['in'][$entity]['are'][$tag]++;
+                $impac2[$object][$entity]['weight']++;
+                $impac2[$object][$entity]['bin'][$tag]++;
 
         file_put_contents($impact2_catalog, json_encode($impac2, JSON_PRETTY_PRINT));
 
@@ -380,7 +440,7 @@ function catalogJUKEBOX($RAW_TAGS, $SHADOW_PROD_TOGGLE, $link, $artist, $song, $
   //--## router settings ------- ##
     $ROUTE__LINE = ROUTE('d', $SHADOW_PROD_TOGGLE);
 
-        $ROUTE = $ROUTE__LINE . '/trackerKEEPER/by_catalog/';
+        $ROUTE = $ROUTE__LINE . '/_trackerKEEPER/catalog/';
         if (!is_dir($ROUTE)) { mkdir($ROUTE, 0775, true); }   
 
         $TAG_CHEST = $ROUTE . 'songs.catalog.json';
@@ -428,6 +488,7 @@ function catalogJUKEBOX($RAW_TAGS, $SHADOW_PROD_TOGGLE, $link, $artist, $song, $
 
 
 function tagSPLICER($RAW_TAGS){
+    $cUID = $GLOBALS['cUID'];
     $add = [];
     
     $TAGS = array_filter(array_map(function($q){
@@ -446,6 +507,7 @@ function tagSPLICER($RAW_TAGS){
         } else {
             $type = "";
         }
+
 
         if (strpos($value, ',') !== false) {
             $values = explode(',', $value);
@@ -466,7 +528,8 @@ function tagSPLICER($RAW_TAGS){
             }
 
             foreach ($parent as $v){
-                
+
+
                 if (!is_array($add[$type])){
                     $add[$type][$v] = [];
                 }
@@ -504,78 +567,3 @@ function tagSPLICER($RAW_TAGS){
 
 //
 
-
-function relationSPLICER($input){
-    $add = [];
-    
-    $input = array_filter(array_map(function($q){
-        return strtolower(trim($q));
-    }, 
-    explode(';', $input)));
-
-    foreach ($input as $string){
-
-        $string = strtolower(trim($string));
-
-        if (strpos($string, '*') !== false) {    
-            [$type, $value] = explode('*', $string, 2);
-            $type = trim($type);
-            $value = trim($value);
-        } else {
-            $type = "";
-        }
-
-        if (strpos($value, ',') !== false) {
-            $values = explode(',', $value);
-        } else {
-            $values = [trim($value)];
-        }
-        
-        foreach ($values as $tag){
-        
-            if (strpos($tag, '>') !== false) {
-                [$parent, $child] = explode('>', $tag, 2);
-                $parent = [trim($parent)];
-                $child = [trim($child)];
-            } else {
-                $parent = [trim($tag)];
-                $child = "";
-
-            }
-
-            foreach ($parent as $v){
-                
-                if (!is_array($add[$type])){
-                    $add[$type][$v] = [];
-                }
-                if (!in_array($v, $add[$type])){
-                    $add[$type][$v] = [];
-                }
-
-                foreach ($child as $c){
-                    if (strpos($c, '+') !== false) {
-                        $kid = explode('+', trim($c));
-                    } else {
-                        $kid = [trim($c)];
-                    }
-
-                    foreach ($kid as $c){
-
-                    if (!is_array($add[$type][$v])){
-                        $add[$type][$v][] = trim($c);
-                    }
-                    if (!in_array($c, $add[$type][$v])){
-                        $add[$type][$v][] = trim($c);
-                    } 
-                    }
-
-                }
-            }   
-        }
-
-    }
-
-    return $add;
-
-
-}

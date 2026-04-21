@@ -9,23 +9,19 @@ require_once __DIR__ . '/-CRATE-postBASIC.php'; // CRATE FILLER SETTINGS
     $a = $GLOBALS[$SITE];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    include_once __DIR__ . '/../tpsMACHINE.php';  // THE TPS MACHINE 
+    require __DIR__ . '/../tpsMACHINE.php';  // THE TPS MACHINE 
 
 $cUID    = SKY_GET_cUID($event_time);
 $tUID    = SKY_GET_tUID($event_time);
 
-// ============================================================================
-// SET UP AND DELIVER CATALOG INSERTS
-//=============================================================================
-
-#catalogTAGS($sha_env, $cUID, $event_time);
-#catalogUNIX($event_time, $cUID, $sha_env);
 
 // ============================================================================
 // OKAY LETS MAKE A CHESTER CRATE OF THIS BIT OF STUFFS! 
 //=============================================================================
-chestersCRATES($sha_env, $a, $cUID, $unix, $event_time, $tUID, $timezone);
+
+chestersCRATES($sha_env, $a, $cUID, $tpstime, $event_time, $tUID, $timezone);
 charliesTHREADS($sha_env);
+catalogUNIX($tpstime, $cUID, $sha_env);
 
 //=============================================================================
 // OH $@%! -- DON'T FORGET YOUR TPS REPORT
@@ -33,10 +29,11 @@ charliesTHREADS($sha_env);
 
 $tpsDATA = buildTPS($tpstime, $ms, $tzone, $event_time);
 
-$TRACKER_KEEPER = $router_1 . 'trackerKEEPER/tps_reports/' . $syear . '/';
+$router_1 = ROUTE('d', $sha_env);
+$TRACKER_KEEPER = $router_1 . '_timeKEEPER/tps_reports/' . $syear . '/' . substr($tpstime, 0, 4) . '-block/';
     aleph($TRACKER_KEEPER);
   
-  $tpsReport = $TRACKER_KEEPER . '/' . $sdate . '.tps.json';
+  $tpsReport = $TRACKER_KEEPER . '/' . substr($tpstime, 0, 7) . '-.tps.json';
   $tpsjson = file_get_contents($tpsReport);
   $tpss = json_decode($tpsjson, true);
 
