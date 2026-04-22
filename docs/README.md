@@ -13,6 +13,6 @@ meaning you can explore how things evolve, connect, and resurface over a wide ar
 it runs on rapidly generated web interfaces with high customization, all powering the same underlying system.
 
 # charlieTHREADS
-- [overview](.overview.md)
-- [syntax](.syntax.md)
-- [views](.views.md)
+- [overview](charlieTHREADS/overview.md)
+- [syntax](charlieTHREADS/syntax.md)
+- [views](charlieTHREADS/views.md)
