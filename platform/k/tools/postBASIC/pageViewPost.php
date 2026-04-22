@@ -6,7 +6,7 @@ require_once $GLOBALS['INTERA']['TOOLS'] . 'skyGenesis/functions.php'; //GET SHA
 $id = $_GET['id'];
 $room = $_GET['w'];
 
-$SHADOW_PROD_TOGGLE = SHADOW_PROD_ENV(true);
+$SHADOW_PROD_TOGGLE = SHADOW_PROD_ENV(false);
 $router_1 = ROUTE('d', $SHADOW_PROD_TOGGLE);
 
 $route = $router_1 . $GLOBALS[$SITE]['SYS_SLUG'] . '/';

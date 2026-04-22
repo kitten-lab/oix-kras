@@ -187,7 +187,7 @@ function chestersCRATES($sha_env, $a, $cUID, $unix, $event_time, $tUID, $timezon
     $router_3 = $route . '_crateKEEPER/search_by_crate/sort_by_ingest/' . date('Y') . '/';
      aleph($router_3);
 
-    $CHEST = $router_1 . $a['DOM_SLUG'] . '-' . $a['ROOM_SLUG'] . '.post.json';    
+    $CHEST = $router_1 . $a['DOM_SLUG'] . '-' . $a['ROOM_SLUG'] . '.' . $GLOBALS['TOOL']['TYPE'] . '.json';    
     $ECHO_CHEST = $router_2 . $tpsDT->format('Y-m-d') . '.event.echo.json';
     $IM_ECHO_CHEST = $router_3 . date('Y-m-d') . '.ingest.echo.json';
 
@@ -606,19 +606,20 @@ $cUID = $GLOBALS['cUID'];
     }
 
 //==============================================================================================
-function catalogJUKEBOX($RAW_TAGS, $SHADOW_PROD_TOGGLE, $link, $artist, $song, $cUID,$tagpath){
+function catalogJUKEBOX($a, $RAW_TAGS, $sha_env, $link, $artist, $song, $cUID){
 
   //--## special inserts ------- ##
     $id = $GLOBALS['JUKEID']; 
     $ACTOR = $GLOBALS['TOOL']['ACTOR'];
-    
-  //--## router settings ------- ##
-    $ROUTE__LINE = ROUTE('d', $SHADOW_PROD_TOGGLE);
 
-        $ROUTE = $ROUTE__LINE . '/_trackerKEEPER/catalog/';
+
+  //--## router settings ------- ##
+    $ROUTE__LINE = ROUTE('d', $sha_env);
+
+        $ROUTE = $ROUTE__LINE . '/_charlieCATALOG/song_catalog/';
         if (!is_dir($ROUTE)) { mkdir($ROUTE, 0775, true); }   
 
-        $TAG_CHEST = $ROUTE . 'songs.catalog.json';
+        $TAG_CHEST = $ROUTE . $a['SYS_SLUG'] . '-' . $a['DOM_SLUG'] . '-songs.catalog.json';
         $json = file_get_contents($TAG_CHEST);
         $TAGS = json_decode($json, true);
 
@@ -650,7 +651,7 @@ function catalogJUKEBOX($RAW_TAGS, $SHADOW_PROD_TOGGLE, $link, $artist, $song, $
         }
 
     if (!in_array($cUID, $TAGS[$artist][$id]['heard_by'][$ACTOR]['played_in'])){
-        $TAGS[$artist][$id]['heard_by'][$ACTOR]['played_in'][$cUID] = $tagpath;
+        $TAGS[$artist][$id]['heard_by'][$ACTOR]['played_in'][$cUID] = 'no';
         $TAGS[$artist][$id]['total_plays']++;
         $TAGS[$artist][$id]['heard_by'][$ACTOR]['count']++;
     }

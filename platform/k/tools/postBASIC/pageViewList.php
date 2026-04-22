@@ -7,7 +7,7 @@ $FIG = getFIG("postBasic", "ViewList");
 
 
 
-$SHADOW_PROD_TOGGLE = SHADOW_PROD_ENV(true);
+$SHADOW_PROD_TOGGLE = SHADOW_PROD_ENV(false);
 $router_1 = ROUTE('d', $SHADOW_PROD_TOGGLE);
 
 $route = $router_1 . $GLOBALS[$SITE]['SYS_SLUG'] . '/';

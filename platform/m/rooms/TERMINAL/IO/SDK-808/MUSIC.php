@@ -17,9 +17,9 @@ openSky($GLOBALS[$SITE]['ROOM_DISPLAY']);
 bigHeading("TERMINAL.IO FILE EXPLORER");
 leaf($GLOBALS[$SITE]['ROOM_SLUG'] . "<br>");
 medHeading("SAM'S FILES > MUSIC");
-getTool("postBASIC", "ViewList");
+getTool("JUKEBOX", "MySongCatalog");
+medHeading("Post a New File Here");
+getTool("JUKEBOX", "UploadSong");
 hr();
-#medHeading("Post a New File Here");
-#getTool("postBASIC", "MakePost");
 
 closeSky();

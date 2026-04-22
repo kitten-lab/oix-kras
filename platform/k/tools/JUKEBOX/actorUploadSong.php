@@ -4,41 +4,17 @@ require_once $GLOBALS['INTERA']['SYSTEM'] . 'chestersCrates.php'; //GET SHADOW P
 require_once $GLOBALS['INTERA']['TOOLS'] . 'skyGenesis/functions.php'; //GET SHADOW PROD TOGGLE
 require_once __DIR__ . '/-SIG-JUKEBOX.php'; //GET SHADOW PROD TOGGLE
 require_once __DIR__ . '/-CRATE-JUKEBOX.php'; //GET SHADOW PROD TOGGLE
-####
-####
+########
 
-$SHADOW_PROD_TOGGLE = SHADOW_PROD_ENV(true);
-
+    $sha_env = SHADOW_PROD_ENV(true);
+    $a = $GLOBALS[$SITE];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-        // DO NOT TOUCHY // THE TPS MACHINE 
+    require __DIR__ . '/../tpsMACHINE.php';  // THE TPS MACHINE 
 
-        $event_time = (int)filter_var($_POST['POST__EVENT_UNIX'], FILTER_SANITIZE_NUMBER_INT);
+$cUID    = SKY_GET_cUID($event_time);
+$tUID    = SKY_GET_tUID($event_time);
 
-        $unix = time();
-        $tzone = $_POST['POST__TZ'];
-        $ms = round(microtime(true) * 1000);
-        $time = new DateTime("@$unix");
-        $time->setTimezone(new DateTimeZone($tzone));
-        $timezone = $time->format("e");
-        $localtime = $time->format("h:i:sA");
-
-        if (!$event_time == '') {
-            $tpstime = $event_time;
-        } else {
-            $tpstime = $unix;
-            $event_time = $unix;
-        }
-    
-        $event_calc = new DateTime("@$event_time");
-        $simpledate = $event_calc->format('Y-m-d');
-        $simpleyear = $event_calc->format('Y');
-
-        $tpsDATA = buildTPS($tpstime, $ms, $tzone, $event_time);
-
-$cUID = 'cUID-' . strtoupper(bin2hex(random_bytes(8)));
-$tUID = 'tUID-' . $event_time . '.' . strtoupper(bin2hex(random_bytes(3)));
 
 ## GET TAGS & FILL CATALOGS (__-SONG-CATALOG-__)
 $GLOBALS['JUKEID'] = getJUKED($_POST['artist']) . '_' . getJUKED($_POST['song_title']) . '.juke';
@@ -48,104 +24,31 @@ $link = $_POST['link'] ?? '';
 $artist = $_POST['artist'] ?? '';
 $song = $_POST['song_title'] ?? '';
 
-$tagpath = '/b/' . $w['SYS_SLUG'] . '/' . $w['DOM_SLUG'] . '/' . $w['ROOM_SLUG'];
-catalogTAGS($RAW_TAGS, $SHADOW_PROD_TOGGLE, $cUID, $event_time, $tagpath);
-catalogUNIX($event_time, $cUID, $SHADOW_PROD_TOGGLE);
-
-catalogJUKEBOX($RAW_TAGS, $SHADOW_PROD_TOGGLE, $link, $artist, $song, $cUID, $tagpath);
-
-
 // ============================================================================
 // OKAY LETS MAKE A CHESTER CRATE OF THIS BIT OF STUFFS! 
 //=============================================================================
 
-$ROUTE__LINE = ROUTE('d', $SHADOW_PROD_TOGGLE);
+catalogJUKEBOX($a,$RAW_TAGS, $sha_env, $link, $artist, $song, $cUID);
+chestersCRATES($sha_env, $a, $cUID, $tpstime, $event_time, $tUID, $timezone);
+charliesTHREADS($sha_env, $tpstime);
+catalogUNIX($tpstime, $cUID, $sha_env);
 
- $ROUTE = $ROUTE__LINE . $GLOBALS[$SITE]['SYS_SLUG'] . '/';
-    if (!is_dir($ROUTE)) { mkdir($ROUTE, 0775, true); }   
-
- $ECHO_ROUTE = $ROUTE__LINE . 'trackerKEEPER/' . $simpleyear . '/';
-    if (!is_dir($ECHO_ROUTE)) { mkdir($ECHO_ROUTE, 0775, true); }   
- 
-  $CHEST = $ROUTE . '/' . $GLOBALS[$SITE]['DOM_SLUG'] . '-' . $GLOBALS[$SITE]['ROOM_SLUG'] .'.jukebox.json';
-    $json = file_get_contents($CHEST);
-    $CHEST_THINGS = json_decode($json, true);
-
-  $ECHO_CHEST = $ECHO_ROUTE . $simpledate . '.echo.json';
-    $ECHO_json = file_get_contents($ECHO_CHEST);
-    $ECHO_CHEST_THINGS = json_decode($ECHO_json, true);
-
-  if (!$CHEST_THINGS) {
-    $CHEST_THINGS = [];
-  }
-  
-  if (!$ECHO_CHEST_THINGS) {
-    $ECHO_CHEST_THINGS = [];
-  }
-  
-  $BUILD_CHEST = buildCHEST($RAW_TAGS,$cUID, $unix, $event_time, $tUID, $timezone);
-
-    $CHEST_THINGS[$cUID] = $BUILD_CHEST;
-    $ECHO_CHEST_THINGS[$cUID] = $BUILD_CHEST;
-  
-
-  file_put_contents($CHEST, json_encode($CHEST_THINGS, JSON_PRETTY_PRINT));
-  file_put_contents($ECHO_CHEST, json_encode($ECHO_CHEST_THINGS, JSON_PRETTY_PRINT));
-
-// ============================================================================
-// YAY DONE!
-// ============================================================================
+//=============================================================================
 // OH $@%! -- DON'T FORGET YOUR TPS REPORT
 // ============================================================================
-  $TRACKER_KEEPER = $ROUTE__LINE . 'tpsREPORTER/' . $simpleyear . '/';
-    if (!is_dir($TRACKER_KEEPER)) { mkdir($TRACKER_KEEPER, 0775, true); }
+
+$tpsDATA = buildTPS($tpstime, $ms, $tzone, $event_time);
+
+$router_1 = ROUTE('d', $sha_env);
+$TRACKER_KEEPER = $router_1 . '_timeKEEPER/tps_reports/' . $syear . '/' . substr($tpstime, 0, 6) . '-block/';
+    aleph($TRACKER_KEEPER);
   
-  $tpsReport = $TRACKER_KEEPER . '/' . $simpledate . '.tps.json';
-  $json = file_get_contents($tpsReport);
-  $tpss = json_decode($json, true);
+  $tpsReport = $TRACKER_KEEPER . '/' . substr($tpstime, 0, 6) . '-.tps.json';
+  $tpsjson = file_get_contents($tpsReport);
+  $tpss = json_decode($tpsjson, true);
 
-    if (!$tpss) {
-        $tpss = [];
-    }
-    if (!isset($tpss[$tUID])){
-
-    $tpss[$tUID] = [
-        "tps_version" => 3,
-        "cUID" => [$cUID],
-        "event_slug" => [],
-        "import_unix" => [time()],
-        "time_certainty" => [
-                "value" => $_POST['CERTAINTY_AMOUNT'],
-                "measurement" => $_POST['CERTAINTY'],
-            ],
-        "event_timezone" => $tzone,
-        "tps_timzezone" => "UTC",
-        "tps_unix" => $event_time,
-        "tps_report" => $tpsDATA
-    ];
-    
-    } else {
-
-    if (!isset($tpss[$tUID]['cUID'])){
-        $tpss[$tUID]['cUID'] = [];
-    }
-
-    if (!in_array($cUID, $tpss[$tUID]['cUID'])){
-        $tpss[$tUID]['cUID'][] = $cUID;
-    }
-
-
-
-    if (!isset($tpss[$tUID]['import_unix'])){
-        $tpss[$tUID]['import_unix'] = [];
-    }
-
-    if (!in_array($cUID, $tpss[$tUID])){
-        $tpss[$tUID]['import_unix'][] = time();
-    }
-    
-    }
-
-
+  $tpss = fileTPS($tUID, $cUID, $tzone, $event_time, $tpsDATA, $tpss);
   file_put_contents($tpsReport, json_encode($tpss, JSON_PRETTY_PRINT));
+
 }
+
