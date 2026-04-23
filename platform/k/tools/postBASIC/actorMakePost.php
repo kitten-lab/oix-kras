@@ -17,20 +17,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $cUID    = SKY_GET_cUID($event_time);
 $tUID    = SKY_GET_tUID($event_time);
 
-
 // ============================================================================
 // OKAY LETS MAKE A CHESTER CRATE OF THIS BIT OF STUFFS! 
 //=============================================================================
 
-chestersCRATES($sha_env, $a, $cUID, $tpstime, $event_time, $tUID, $timezone);
+chestersCRATES($sha_env, $a, $tpstime, $event_time, $timezone);
 charliesTHREADS($sha_env, $tpstime);
-catalogUNIX($tpstime, $cUID, $sha_env);
+catalogUNIX($tpstime, $sha_env);
 
 //=============================================================================
 // OH $@%! -- DON'T FORGET YOUR TPS REPORT
 // ============================================================================
 
-$tpsDATA = buildTPS($tpstime, $ms, $tzone, $event_time);
+$tpsDATA = buildTPS($tpstime, $ms, $event_time);
 
 $router_1 = ROUTE('d', $sha_env);
 $TRACKER_KEEPER = $router_1 . '_timeKEEPER/tps_reports/' . $syear . '/' . substr($tpstime, 0, 6) . '-block/';
@@ -40,7 +39,7 @@ $TRACKER_KEEPER = $router_1 . '_timeKEEPER/tps_reports/' . $syear . '/' . substr
   $tpsjson = file_get_contents($tpsReport);
   $tpss = json_decode($tpsjson, true);
 
-  $tpss = fileTPS($tUID, $cUID, $tzone, $event_time, $tpsDATA, $tpss);
+  $tpss = fileTPS($event_time, $tpsDATA, $tpss);
   file_put_contents($tpsReport, json_encode($tpss, JSON_PRETTY_PRINT));
 
 }

@@ -1,12 +1,5 @@
 <?php 
 
-function getJUKED($string){
-
-    $string = strtolower($string);
-    $string = trim($string);
-    $string = preg_replace('/\s+/', '-', $string);
-    return strip_tags($string);
-} //HILARIOUSLY JUST BASICALLY ERASES YOUR INPUT. KEPT FOR PROSTERITY
 
 
 function aleph($ROUTE){
@@ -14,7 +7,8 @@ function aleph($ROUTE){
 }
 
 function SKY_GET_tUID($event_time){
-    $tUID = $event_time  . '.tps';
+    $GLOBALS['tUID'] = $event_time  . '.tps';
+        $tUID = $GLOBALS['tUID'];
         return $tUID;
 }
 
@@ -26,8 +20,11 @@ function SKY_GET_cUID($event_time){
 
 }
 
+
 //==============================================================================================
-function buildTPS($unix, $ms,$tzone, $event_time) {
+// FUNCTIONS FOR THE TPS MACHINE
+//==============================================================================================
+function buildTPS($unix, $ms, $event_time) {
 
     $tpsDT = new DateTime("@$unix");
     $tpsDT->setTimezone(new DateTimeZone("UTC"));
@@ -53,7 +50,10 @@ function buildTPS($unix, $ms,$tzone, $event_time) {
     }
 
 //----------------------------------------------------------------------------------------------------
-function fileTPS($tUID, $cUID, $tzone, $event_time, $tpsDATA, $tpss){
+function fileTPS($event_time, $tpsDATA, $tpss){
+    //GET YOUR COMMONS! 
+    $tUID = $GLOBALS['tUID'];
+    $cUID = $GLOBALS['cUID'];
 
     if (!$tpss) {
         $tpss = [];
@@ -71,7 +71,7 @@ function fileTPS($tUID, $cUID, $tzone, $event_time, $tpsDATA, $tpss){
             "unit" => "seconds",
             "confidence" => "exact",
         ],
-        "event_timezone" => $tzone,
+        "event_timezone" => $_POST['POST__TZ'],
         "tps_timzezone" => "UTC",
         "tps_unix" => $event_time,
         "tps_report" => $tpsDATA
@@ -137,9 +137,14 @@ function json_origin(){
 */
 
 //==============================================================================================
-function buildCHEST($RAW_TAGS, $cUID, $unix, $event_time, $tUID, $timezone){
-
-$SITE = $GLOBALS['SITE'];
+function buildCHEST($unix, $event_time){
+    //GET YOUR COMMONS! 
+    $RAW_TAGS = $_POST['POST__TAGS'] ?? '';
+    $tUID = $GLOBALS['tUID'];
+    $cUID = $GLOBALS['cUID'];
+    $SITE = $GLOBALS['SITE'];
+    
+    
     $RAW_TAGS = str_replace(["\r","\n", "\t"], '', $RAW_TAGS);
     $RAW_TAGS = trim($RAW_TAGS);
 $TAGS = tagSPLICER($RAW_TAGS);
@@ -163,14 +168,18 @@ $TAGS = tagSPLICER($RAW_TAGS);
             "tUID" => $tUID, 
             "ingest_unix" => $unix,
             "event_unix" => $event_time,
-            "timezone" => $timezone,
+            "timezone" => $_POST['POST__TZ'],
         ]
     ];
 }
 //----------------------------------------------------------------------------------------------------
-function chestersCRATES($sha_env, $a, $cUID, $unix, $event_time, $tUID, $timezone){
-    $RAW_TAGS = $_POST['POST__TAGS'] ?? '';
+function chestersCRATES($sha_env, $a, $unix, $event_time){
+    //GET YOUR COMMONS! 
+    $tUID = $GLOBALS['tUID'];
+    $cUID = $GLOBALS['cUID'];
+    $SITE = $GLOBALS['SITE'];
 
+    $RAW_TAGS = $_POST['POST__TAGS'] ?? '';
 
     $tpsDT = new DateTime("@$unix");
     $tpsDT->setTimezone(new DateTimeZone("UTC"));
@@ -178,7 +187,7 @@ function chestersCRATES($sha_env, $a, $cUID, $unix, $event_time, $tUID, $timezon
     $date = (int)$tpsDT->format('x-m-d');
 
     $route = ROUTE('d', $sha_env);
-    $BUILD_CHEST = buildCHEST($RAW_TAGS, $cUID, $unix, $event_time, $tUID, $timezone);
+    $BUILD_CHEST = buildCHEST($RAW_TAGS, $unix, $event_time);
 
     $router_1 = $route . $a['SYS_SLUG'] . '/';
      aleph($router_1);
@@ -228,8 +237,13 @@ $TOOL = $GLOBALS['TOOL'];
 }
 
 //==============================================================================================
-function catalogUNIX($UNIX,$cUID, $SHADOW_PROD_TOGGLE){
+function catalogUNIX($UNIX, $sha_env){
 
+    //GET YOUR COMMONS! 
+    $tUID = $GLOBALS['tUID'];
+    $cUID = $GLOBALS['cUID'];
+    $SITE = $GLOBALS['SITE'];
+    $MOD = $GLOBALS[$SITE]['MOD_SLUG'];
 
     $tpsDT = new DateTime("@$UNIX");
     $tpsDT->setTimezone(new DateTimeZone("UTC"));
@@ -237,12 +251,10 @@ function catalogUNIX($UNIX,$cUID, $SHADOW_PROD_TOGGLE){
     $date = (int)$tpsDT->format('x-m-d');
 
 
-$SITE = $GLOBALS['SITE'];
-$MOD = $GLOBALS[$SITE]['MOD_SLUG'];
 
     //--## router settings ------- ##
 
-    $ROUTE__LINE = ROUTE('d', $SHADOW_PROD_TOGGLE);
+    $ROUTE__LINE = ROUTE('d', $sha_env);
     $ROUTE = $ROUTE__LINE . '/_timeKEEPER/lookup/by_tps/' . $year . '/' . substr($UNIX, 0, 6)  . '-block/';
     if (!is_dir($ROUTE)) { mkdir($ROUTE, 0775, true); }   
 
@@ -290,10 +302,12 @@ function charlieINDEX($sha_env, $group, $add, $level){
 
 
 function chesterLOOKUP($tpstime, $sha_env, $add, $level,$level2,$level3){
-    
-$SITE = $GLOBALS['SITE'];
-$MOD = $GLOBALS[$SITE]['MOD_SLUG'];
-$cUID = $GLOBALS['cUID'];
+    //GET YOUR COMMONS! 
+    $tUID = $GLOBALS['tUID'];
+    $cUID = $GLOBALS['cUID'];
+    $SITE = $GLOBALS['SITE'];
+    $MOD = $GLOBALS[$SITE]['MOD_SLUG'];
+
         foreach ($add as $entity => $objs){
         foreach ($objs as $objects => $tags){
         foreach ($tags as $tag){
@@ -334,122 +348,15 @@ $cUID = $GLOBALS['cUID'];
 }
 
 
-function charlieTHREAD2($sha_env, $tpstime){
-
-
-    $RAW_TAGS = $_POST['POST__TAGS'] ?? '';
-    $router_1 = ROUTE('d', $sha_env);
-    $add = tagSPLICER($RAW_TAGS);
-
-
-    foreach ($add as $entity => $objs){
-        foreach ($objs as $object => $tags){
-            foreach ($tags as $tag){
-
-        $catalog_rt = $router_1 . '_trackerKEEPER/tags/by_entity/';
-            aleph($catalog_rt);
-            $MTAG_CHEST = $catalog_rt . $entity . '.entity.json';
-            $json1 = file_get_contents($MTAG_CHEST);
-            $tc = json_decode($json1, true);
-
-        if (!$tc) {
-            $tc = [];
-        }
-
-        if (!in_array($entity, $tc))
-            $tc = [
-                'name' => $entity,
-                'gravity' => 0,
-                'alias' => [],
-                'notes' => [],
-                'date_added' => [
-                    'unix' => time(),
-                    'cUID' => $GLOBALS['cUID']],
-                'earliest_mention' => [
-                    'event_unix' => $tpstime,
-                    'cUID' => $GLOBALS['cUID'],
-                ],
-                'last_mention' => [
-                    'ingest_unix' => time(),
-                    'event_unix' => $tpstime,
-                    'cUID' => $GLOBALS['cUID'],
-                ],
-            ];
-        
-
-
-            if (!isset($tc[$object]))
-                $tc[$object]= [
-                    
-                'gravity' => 0,
-                'date_added' => [
-                    'unix' => time(),
-                    'cUID' => $GLOBALS['cUID']],
-                'earliest_mention' => [
-                    'event_unix' => $tpstime,
-                    'cUID' => $GLOBALS['cUID'],
-                ],
-                'last_mention' => [
-                    'ingest_unix' => time(),
-                    'event_unix' => $tpstime,
-                    'cUID' => $GLOBALS['cUID'],
-                ],
-                'bin' => []
-                    
-                ];
-            
-
-
-        if (!is_array($tc[$object]['bin'][$tag]))
-            $tc[$object]['bin'][$tag] ?? [];
-        
-            
-
-            if (!isset( $tc[$object]['bin'][$tag]))
-                $tc[$object]['bin'][$tag] = [
-                    
-                'gravity' => 0,
-            
-                'date_added' => [
-                    'unix' => time(),
-                    'cUID' => $GLOBALS['cUID']],
-                'earliest_mention' => [
-                    'event_unix' => $tpstime,
-                    'cUID' => $GLOBALS['cUID'],
-                ],
-                'last_mention' => [
-                    'ingest_unix' => time(),
-                    'event_unix' => $tpstime,
-                    'cUID' => $GLOBALS['cUID']
-                ],
-                    
-                ];
-            
-
-
-
-        if (!isset($tc['last_mention']['ingest_unix'][$tpstime]))
-        $tc['last_mention']['ingest_unix'] = $tpstime;
-        if (!isset($tc['last_mention']['event_unix']))
-        $tc['last_mention']['event_unix'] = time();
-
-                $tc[$object]['gravity']++;
-                $tc['gravity']++;
-                $tc[$object]['bin'][$tag]['gravity']++;
-                
-    file_put_contents($MTAG_CHEST, json_encode($tc, JSON_PRETTY_PRINT));
-
-            }
-        }
-    }
-
-}
 
 //--------------------------------------------------------------------------------
 function charliesTHREADS($sha_env, $tpstime){
-    
-$cUID = $GLOBALS['cUID'];
+    //GET YOUR COMMONS! 
+    $tUID = $GLOBALS['tUID'];
+    $cUID = $GLOBALS['cUID'];
+    $SITE = $GLOBALS['SITE'];
     $RAW_TAGS = $_POST['POST__TAGS'] ?? '';
+
     $router_1 = ROUTE('d', $sha_env);
     $add = tagSPLICER($RAW_TAGS);
 
@@ -608,9 +515,12 @@ $cUID = $GLOBALS['cUID'];
     }
 
 //==============================================================================================
-function catalogJUKEBOX($a, $RAW_TAGS, $sha_env, $link, $artist, $song, $cUID){
-
-  //--## special inserts ------- ##
+function catalogJUKEBOX($a, $sha_env, $link, $artist, $song){
+    //GET YOUR COMMONS! 
+    $RAW_TAGS = $_POST['POST__TAGS'] ?? '';
+    $tUID = $GLOBALS['tUID'];
+    $cUID = $GLOBALS['cUID'];
+    $SITE = $GLOBALS['SITE'];
     $id = $GLOBALS['JUKEID']; 
     $ACTOR = $GLOBALS['TOOL']['ACTOR'];
 
@@ -663,7 +573,12 @@ function catalogJUKEBOX($a, $RAW_TAGS, $sha_env, $link, $artist, $song, $cUID){
 }
 
 
-
+function getJUKED($string){
+    $string = strtolower($string);
+    $string = trim($string);
+    $string = preg_replace('/\s+/', '-', $string);
+    return strip_tags($string);
+} 
 
 function tagSPLICER($RAW_TAGS){
     $cUID = $GLOBALS['cUID'];
