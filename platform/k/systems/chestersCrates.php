@@ -1,8 +1,7 @@
 <?php 
 
-
-
 function aleph($ROUTE){
+    // plow the field is there is no directory, so space can exist //
     if (!is_dir($ROUTE)) { mkdir($ROUTE, 0775, true); }
 }
 
@@ -11,7 +10,6 @@ function SKY_GET_tUID($event_time){
         $tUID = $GLOBALS['tUID'];
         return $tUID;
 }
-
 
 function SKY_GET_cUID($event_time){
     $GLOBALS['cUID'] = 'crate.' . strtoupper(bin2hex(random_bytes(8)));

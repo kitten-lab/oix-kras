@@ -1,15 +1,11 @@
 <?php
 require_once $GLOBALS['INTERA']['SYSTEM'] . 'rehydrateSelf.php'; // MOISTURIZE ME
 require_once $GLOBALS['INTERA']['SYSTEM'] . 'chestersCrates.php'; // CHEST CRATING SYSTEM
-require_once $GLOBALS['INTERA']['TOOLS'] . 'skyGenesis/functions.php'; // GET SHADOW PROD TOGGLE
+require_once $GLOBALS['INTERA']['SYSTEM'] . 'shadowENVO.php'; // GET SHADOW PROD TOGGLE
 require_once __DIR__ . '/-SIG-postBASIC.php'; // ASSISTANT SETTINGS
 require_once __DIR__ . '/-CRATE-postBASIC.php'; // CRATE FILLER SETTINGS
 
-
-    $sha_env = SHADOW_PROD_ENV(true);
     $a = $GLOBALS[$SITE];
-
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require __DIR__ . '/../tpsMACHINE.php';  // THE TPS MACHINE 
