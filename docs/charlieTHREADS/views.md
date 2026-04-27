@@ -20,17 +20,63 @@ and the sent out to be threaded into several reports (examples are various conte
 ### - by single-word lookup
 ```
 {
-    "media": {
-        "gravity": 1,
-        "news": {
-            "weight": 1,
-            "skyline-news": {
-                "weight": 1,
-                "reported_by": {
-                    "SKYLINE-REPORTER": {
-                        "1776806032": [
-                            "crate.91C7D7CA0B3E81AF"
-                        ]
+    "CABINET": {
+        "financial-plan": {
+            "METADATA": {
+                "GRAVITY": 1,
+                "INGEST": {
+                    "FIRST": 1777159009,
+                    "LAST": 1777159009
+                },
+                "EVENT": {
+                    "FIRST": [],
+                    "LAST": []
+                },
+                "LAST_USAGE": {
+                    "1739984014": [
+                        "symbolcraft"
+                    ]
+                }
+            },
+            "SHELF": {
+                "symbolcraft": {
+                    "METADATA": {
+                        "GRAVITY": 1,
+                        "INGEST": {
+                            "FIRST": 1777159009,
+                            "LAST": 1777159009
+                        },
+                        "EVENT": {
+                            "FIRST": [],
+                            "LAST": []
+                        },
+                        "LAST_USAGE": {
+                            "1739984014": [
+                                "docs"
+                            ]
+                        }
+                    },
+                    "BIN": {
+                        "docs": {
+                            "METADATA": {
+                                "GRAVITY": 1,
+                                "INGEST": {
+                                    "FIRST": 1777159009,
+                                    "LAST": 1777159009
+                                },
+                                "EVENT": {
+                                    "FIRST": [],
+                                    "LAST": []
+                                }
+                            },
+                            "INSTANCES": {
+                                "1739984014": {
+                                    "DW": [
+                                        "crate.26570475582EB59D"
+                                    ]
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -41,45 +87,19 @@ and the sent out to be threaded into several reports (examples are various conte
 ### - by entity 
 ```
 {
-    "name": "news",
-    "gravity": 1,
-    "tps_metadata": {
-        "added": {
-            "cUID": "crate.91C7D7CA0B3E81AF",
-            "unix": 1776806032
-        },
-        "updated": {
-            "cUID": "crate.91C7D7CA0B3E81AF",
-            "unix": 1776806032
-        }
-    },
-    "contents": {
-        "media": {
-            "gravity": 1,
-            "tps_metadata": {
-                "added": {
-                    "cUID": "crate.91C7D7CA0B3E81AF",
-                    "unix": 1776806032
-                },
-                "updated": {
-                    "cUID": "crate.91C7D7CA0B3E81AF",
-                    "unix": 1776806032
-                }
-            },
-            "bin": {
-                "skyline-news": {
-                    "gravity": 1,
-                    "tps_metadata": {
-                        "added": {
-                            "cUID": "crate.91C7D7CA0B3E81AF",
-                            "unix": 1776806032
-                        },
-                        "updated": {
-                            "cUID": "crate.91C7D7CA0B3E81AF",
-                            "unix": 1776806032
-                        }
-                    }
-                }
+    "VEN": "data-forestry",
+    "GRAVITY": 4,
+    "ALIAS": [],
+    "NOTES": [],
+    "METADATA": [],
+    "SHELF": {
+        "purpose": {
+            "GRAVITY": 4,
+            "BIN": {
+                "ingest-material": 1,
+                "searchable": 1,
+                "storage": 1,
+                "silo": 1
             }
         }
     }
@@ -89,16 +109,30 @@ and the sent out to be threaded into several reports (examples are various conte
 "insect" views show overlapping relationships across entities—where multiple threads converge into shared meaning.
 ```
 {
-    "name": "remembers",
-    "gravity": 33,
-    "tps_metadata": [],
-    "remembers": {
-        "sdk-808": {
-            "weight": 33,
-            "bin": {
-                "jace": 11,
-                "glenshadow": 11,
-                "wbs": 11
+    "VEN": "detective-case_work",
+    "GRAVITY": 41,
+    "METADATA": [],
+    "SHELF": {
+        "slots": {
+            "GRAVITY": 41,
+            "BIN": {
+                "illustrations": 2,
+                "main_game": 3,
+                "functionality": 5,
+                "intentions": 10,
+                "theme": 2,
+                "detective-for-hire": 3,
+                "anticipation": 1,
+                "resolution": 1,
+                "two-act": 1,
+                "investigation": 1,
+                "story-phases": 1,
+                "trope_detective": 1,
+                "office": 2,
+                "symbols": 1,
+                "solutions": 2,
+                "client-cases": 2,
+                "environment": 3
             }
         }
     }
@@ -107,53 +141,15 @@ and the sent out to be threaded into several reports (examples are various conte
 ### - and by relations 
 ```
 {
-    "name": "hymn",
-    "gravity": 11,
-    "tps_metadata": {
-        "added": {
-            "cUID": "crate.DCA1352FE41D4F36",
-            "unix": 1776802656
-        },
-        "updated": {
-            "cUID": "crate.55B6F0683A627A11",
-            "unix": 1776803285
-        }
-    },
-    "hymn": {
-        "crate": {
-            "weight": 3,
-            "bin": {
-                "about": 3
-            }
-        }
-    },
-    "contents": {
-        "about": {
-            "gravity": 8,
-            "tps_metadata": {
-                "added": {
-                    "cUID": "crate.DCA1352FE41D4F36",
-                    "unix": 1776802656
-                },
-                "updated": {
-                    "cUID": "crate.55B6F0683A627A11",
-                    "unix": 1776803285
-                }
-            },
-            "bin": {
-                "hymn": {
-                    "gravity": 8,
-                    "tps_metadata": {
-                        "added": {
-                            "cUID": "crate.DCA1352FE41D4F36",
-                            "unix": 1776802656
-                        },
-                        "updated": {
-                            "cUID": "crate.55B6F0683A627A11",
-                            "unix": 1776803285
-                        }
-                    }
-                }
+    "VEN": "partnerships",
+    "GRAVITY": 2,
+    "METADATA": [],
+    "SHELF": {
+        "symbolcraft": {
+            "GRAVITY": 2,
+            "BIN": {
+                "opportunities": 1,
+                "goals": 1
             }
         }
     }
