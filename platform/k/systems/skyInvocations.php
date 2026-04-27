@@ -11,7 +11,11 @@ function interraLocation(){
                 require resolveShell($GLOBALS[$SITE]['SYS_SLUG']);
                 exit;
     } else {
-        return $GLOBALS['SKY_LOCATION'] = 'b/' . $GLOBALS[$SITE]['URI'];
+        if ($GLOBALS['ENV'] === 'ROSEWOOD8') {
+            return $GLOBALS['SKY_LOCATION'] = 'b/' . $GLOBALS[$SITE]['URI'];
+        } else {
+            return $GLOBALS['SKY_LOCATION'] = 'http://b.imported.to/' . $GLOBALS[$SITE]['URI'];
+        }
     }
 }
 
@@ -21,11 +25,11 @@ function keyMaker() {
     if (empty($_GET)) {
         $uri = trim($_SERVER['REQUEST_URI'], '/');
         $uri = strtok($uri, '?');
-        if (str_starts_with($uri, $GLOBALS['SKY_LOCATION'])) {
-            $uri = substr($uri, strlen($GLOBALS['SKY_LOCATION']));
-        }
-        $uri = trim($uri, '/');
-
+#        if (str_starts_with($uri, $GLOBALS['SKY_LOCATION'])) {
+#            $uri = substr($uri, strlen($GLOBALS['SKY_LOCATION']));
+#        }
+#        $uri = trim($uri, '/');
+#
         $segments = explode('/', $uri);
 
         if (count($segments) >= 2) {
