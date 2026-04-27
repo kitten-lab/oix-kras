@@ -1,5 +1,5 @@
 {
-    "count": 117,
+    "count": 240,
     "b-node": {
         "bbc": 14,
         "bbc-gdd": 7,
@@ -19,6 +19,20 @@
         "threads": 4,
         "threats": 6,
         "goals": 5,
-        "suggested-goals": 7
+        "suggested-goals": 7,
+        "animal": 3,
+        "who": 1,
+        "slots": 25,
+        "detective-case_work": 41,
+        "atmosphere": 1,
+        "location": 2,
+        "door": 1,
+        "detective": 1,
+        "feature": 11,
+        "symbols": 10,
+        "intentions": 4,
+        "solutions": 5,
+        "client-cases": 9,
+        "environment": 9
     }
 }

@@ -1,8 +1,14 @@
 {
-    "count": 117,
+    "count": 240,
     "a-node": {
         "sopr": 21,
         "symbolcraft": 32,
-        "betsoft": 64
+        "betsoft": 64,
+        "omen": 1,
+        "symbol": 2,
+        "questions": 1,
+        "games": 25,
+        "slots": 41,
+        "detective-case_work": 53
     }
 }

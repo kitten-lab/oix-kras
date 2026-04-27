@@ -26,18 +26,13 @@ $nav = [ "navSec" =>
         "BUILDING" => "symbolCRAFT", //nav label
         "PRIME_KEY" => "home", 
         "ROOMS" => [
-
-            [ 
-                "KEY" => "symbolCRAFT home",  //nav label
-                "ROOM" => "home",  // key_name
-            ],
             [ 
                 "KEY" => "business plan",  //nav label
                 "ROOM" => "business-plan",  // key_name
             ],
             [ 
-                "KEY" => "pi: betsoft",  //nav label
-                "ROOM" => "provider-insights-betsoft",  // key_name
+                "KEY" => "games/detective",  //nav label
+                "ROOM" => "[slots]=detective-case_work",  // key_name
             ],
             [ 
                 "KEY" => "--view",  //nav label

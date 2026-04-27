@@ -19,13 +19,16 @@ if ($ENV === 'ROSEWOOD8') {
 
 
 
-$GLOBALS['MATERIAL']['TYPE'] = "Chat";
-$GLOBALS['MATERIAL']['SOURCE']['NAME'] = "Glass_Box";
-$GLOBALS['MATERIAL']['SOURCE']['ID'] = "2025-02-19__Business_Plan_Help__53msgs.json";
-$GLOBALS['MATERIAL']['SOURCE']['CREATED'] = 1739983654;
-$GLOBALS['MATERIAL']['SOURCE']['LAST_MODIFIED'] = 1740599830;
-$GLOBALS['MATERIAL']['REFS'] = [];
+$GLOBALS['MATERIAL']['TYPE'] = "Obsidian Vault";
+$GLOBALS['MATERIAL']['SOURCE']['NAME'] = "kitten-lab";
+$GLOBALS['MATERIAL']['SOURCE']['ID'] = "design-ideas/game-design-ideas/slot-ideas/detective-mystery-slot";
+$GLOBALS['MATERIAL']['SOURCE']['CREATED'] = 1773318609;
+$GLOBALS['MATERIAL']['SOURCE']['LAST_MODIFIED'] = 1773326109;
+$GLOBALS['MATERIAL']['REFS'] = [
+    "ORIGIN_SOURCE" => "Imported to Vault from Glass_Chats"
+];
 $GLOBALS['MATERIAL']['DETAILS'] = [];
-$GLOBALS['MATERIAL']['USER'] = "DANIEL.WAKE";
-$GLOBALS['MATERIAL']['ASSISTANT'] = "DW-ASSISTANT"
+$GLOBALS['MATERIAL']['USER'] = "GameDesignerBARBIE";
+$GLOBALS['MATERIAL']['ASSISTANT'] = "GD-AssistantKEN"
+
 ?>
