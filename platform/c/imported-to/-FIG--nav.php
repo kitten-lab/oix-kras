@@ -11,11 +11,12 @@ Listen, you are going to need to TRUST THE [] colors. They
 don't lie. But sometimes, you will be confused by this nest.
 That's okay. Each time it WILL GET EASIER.  -abl 
 --------------------------------------------------------------*/
+$GLOBALS[$SITE]['GETS']['sideNav'] = $GLOBALS['SONAR'] . 'a/' . $SITE . '/asSys/nav.php'; 
 
 
 $GLOBALS[$SITE]['tDOM'] = [
                     ["DOM" => "public"],
-                    ["DOM" => "{{DOM_SLUG}}"],
+                    ["DOM" => "cities"],
                     ["DOM" => "w"],
                     ];
 $GLOBALS[$SITE]['key'] = "home"; 
@@ -32,12 +33,12 @@ $nav = [ "navSec" =>
             ],
         ]
  ],[ 
-        "DOM" => "{{DOM_SLUG}}", 
-        "BUILDING" => "{{DOM_DISPLAY}}", 
+        "DOM" => "cities", 
+        "BUILDING" => "Imported Cities", 
         "KEY" => "home", 
         "ROOMS" => [ [
-                "ROOM" => "{{KEY_SLUG}}", 
-                "KEY" => "{{KEY_DISPLAY}}", 
+                "ROOM" => "districts-map", 
+                "KEY" => "Map of Imported Cities Districts", 
             ],
         ]
  ]

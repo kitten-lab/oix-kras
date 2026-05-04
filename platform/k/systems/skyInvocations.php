@@ -41,7 +41,7 @@ function keyMaker() {
             foreach ($doors as $door){
                 if ($segments[0] == $door['DOM']) {
                     aRoomWithNoKey();
-                    require resolveShell($GLOBALS[$SITE]['SYS_SLUG'] ?? "SKYLINE");
+                    require resolveShell($GLOBALS[$SITE]['SYS_SLUG']);
                     exit;
                 }
             }

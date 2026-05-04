@@ -14,9 +14,7 @@ SKY__AUTH(
 openSky("{{KEY_DISPLAY}}");
 
 
-bigHeading("Welcome to home {{SYS_DISPLAY}}! You are now on SKYLINE On INTERA.");
-medHeading("THANK YOU FOR JOINING US.");
-leaf("Thank you for becoming part of our SIGHT. We CUKRA.");
+bigHeading("Welcome to home {{DOM_DISPLAY}}! You are now on SKYLINE On INTERA.");
 getTool("keyMAKER2","MakeKey");
 
 closeSky();

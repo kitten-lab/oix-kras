@@ -19,6 +19,7 @@ foreach ($GLOBALS['GETS']['dressing'] as $fn) {
 </head>
 <!-- END OPENING PRAYERS -->
 <body>
+<?php include 'header.php'; ?>
 
 <main>
 
@@ -43,9 +44,9 @@ if (!empty($GETS__SITE['sideNav'])
 </html>
 <!-- AMEN -->
 <script>
-if (window.location.pathname === '/{{SYS_SLUG}}/' &&
+if (window.location.pathname === '/imported-to/' &&
     !window.location.search
 ) {
-  window.location.replace("/{{SYS_SLUG}}?public=hi-from-SKY");
+  window.location.replace("/imported-to?public=hi-from-SKY");
   }
 </script>

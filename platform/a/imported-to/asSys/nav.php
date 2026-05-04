@@ -6,8 +6,6 @@ $SKY_AUTH = $GLOBALS[$SITE]; ?>
 <nav>
 <DIV class="main_nav"><ul>
 <div class="ROOM_ID">
-<h4>concepts of</h4>
-<h2>DANIELLE LEVE</h2>
 
 
 <?php foreach ($nav as $section): ?>

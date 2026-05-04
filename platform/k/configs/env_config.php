@@ -1,6 +1,6 @@
 <?php
 require_once 'auth_check.php';
-$ENV = 'ROSEWOOD8';
+$ENV = 'canvas';
 $GLOBALS['ENV'] = $ENV;
 date_default_timezone_set("America/New_York");
 

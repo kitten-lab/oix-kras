@@ -1,7 +1,17 @@
 <?php
-require_once __DIR__ . '/../../systems/rehydrateSelf.php';
+require_once $GLOBALS['INTERA']['SYSTEM'] . 'chestersCrates.php'; // CHEST CRATING SYSTEM
+
+require_once __DIR__ . '/-SIG-skyGenesis.php'; // ASSISTANT SETTINGS
+#require_once __DIR__ . '/-CRATE-soprBASIC.php'; // CRATE FILLER SETTINGS
+
+require_once $GLOBALS['INTERA']['SYSTEM'] . 'shadowENVO.php';
+    $IS_IT = $GLOBALS['TOOL']['SHADOWENVO'];
+        $sha_env = shadowENVO($IS_IT);
+            if ($IS_IT == true) {
+                echo "<div class='sha_env'>shadow mode on</div>";
+}
+
 require_once __DIR__ . '/functions.php';
-$SHADOW_PROD_TOGGLE = SHADOW_PROD_ENV(true);
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -11,152 +21,93 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $POST__MOD =         $_POST['POST__MOD'];
     $POST__PV =          $_GET['pv'] ?? '__UNDISCLOSED__';
     $POST__TIMEZONE =    $_POST['POST__TZ'];
-
-    $GLOBALS['POST__LOVERS_MARK'] = $_POST['LOVERS_MARK'];
     $POST__ACTING__AS =  $_POST['ACTING__AS'];
-    
-    $GLOBALS['GEN__WORLD_NAME'] =   $_POST['GEN__WORLD_NAME'];
-    $GLOBALS['GEN__WORLD_SYS'] =    $_POST['GEN__WORLD_SYS'];
-    $GLOBALS['GEN__WORLD_DOM'] =    $_POST['GEN__WORLD_DOM'];
-    $GLOBALS['GEN__WORLD_MOD'] =    $_POST['GEN__WORLD_MOD'];
-    $GLOBALS['GEN__ROOM'] =         $_POST['GEN__ROOM'];
 
-
-    $GLOBALS['VARIANT'] = "BASIC";
-
-    ## TOOL SIG FILE
-    $TOOL_FUNC = "GENERATE A WORLD";
-    $TOOL_LOC = "skyGenesis";
-    $TOOL_NAME = "actorCreateWorld";
-        ## SET YOUR KDE FOR THIS TOOL ##
-        $KDE__ERROR_TYPE = $TOOL_FUNC . " DUPLICATE REJECTED";
-        $KDE__SOURCE = $TOOL_NAME;
-        $KDE__ECHO_CHAIN = $POST__SYS . ' > ' . $POST__DOM . ' > ' . $POST__MOD;
-        $KDE__ERROR = "THE SKY LOCATED A HOME IN SIGHT. CONSIDER LOCATING THAT HOME OR USE A UNIQUE WORLD_NAME.";
-        ################################
-
-    $cUID = 'cUID-' . strtoupper(bin2hex(random_bytes(8)));
-        $CHEST__HEADER = "GENERATED " . $GLOBALS['GEN__WORLD_NAME'];
-        $CHEST__CONTEXT = 'CREATED BY ' . $POST__SYS;
-        $CHEST__ACTOR = $TOOL_NAME;
-        $CHEST__EVENT = $TOOL_FUNC;
-        $CHEST__EVENT_LOCATON = $TOOL_LOC;
-
-    $tUID = 'tUID-' . date('Ymd') . '.' . strtoupper(bin2hex(random_bytes(3)));
-        $unix = time();
-        $tzone = $POST__TIMEZONE;
-        $ms = round(microtime(true) * 1000);
-        $time = new DateTime("@$unix");
-        $time->setTimezone(new DateTimeZone($tzone));
-        $timezone = $time->format("e");
-        $localtime = $time->format("h:i:sA");
-        
-    $event_calc = new DateTime("@$unix");
-        $simpledate = $event_calc->format('Y-m-d');
-        $simpleyear = $event_calc->format('Y');
-
-        function buildTPS($unix, $ms,$tzone) {
-            $tpsDT = new DateTime("@$unix");
-            $tpsDT->setTimezone(new DateTimeZone("UTC"));
-            $year = (int)$tpsDT->format('x');
-
-            return [
-                "UNIX" => $unix,
-                "POST__TZONE" => $tzone,
-                "TPS__TZONE" => "UTC",
-                "TPS__netLoop" => (int)$tpsDT->format('B'),
-                "TPS__millennium" => intdiv($year, 1000),
-                "TPS__century" => intdiv($year, 100),
-                "TPS__decade" => intdiv($year, 10),
-                "TPS__year" => $year,
-                "TPS__leap" => (int)$tpsDT->format('L'),
-                "TPS__month" => (int)$tpsDT->format("n"),
-                "TPS__week" => (int)$tpsDT->format("W"),
-                "TPS__dayOfYear" => (int)$tpsDT->format("z"),
-                "TPS__dayOfMonth" => (int)$tpsDT->format("j"),
-                "TPS__dayOfWeek" => (int)$tpsDT->format("w"),
-                "TPS__hour" => (int)$tpsDT->format("G"),
-                "TPS__minute" => (int)$tpsDT->format("i"),
-                "TPS__second" => (int)$tpsDT->format("s"),
-                "TPS__ms" => $ms % 1000,
-            ];
-            }
-
-    $tpsDATA = buildTPS($unix,$ms,$tzone);
-    
+    $GLOBALS['VARIANT'] = "BASIC";    
 
 //  BET ROUTE__LINE >>>>>>>>>>>>>>>>>>>>>>>>
-$ROUTE__LINE = ROUTE("b", $SHADOW_PROD_TOGGLE);
+$ROUTE__LINE = ROUTE("b", $sha_env);
 
-    $ROUTE = $ROUTE__LINE . $GLOBALS['GEN__WORLD_NAME'] . '/';
+    $ROUTE = $ROUTE__LINE . $_POST['SYS_SLUG'] . '/';
     
         if (is_dir($ROUTE)) { KDE($$KDE__ERROR_TYPE, $KDE__SOURCE, $KDE__ECHO_CHAIN, $KDE__ERROR);}
         else { mkdir($ROUTE, 0775, true); }
         
         $CREATED_SKY_AUTH = CREATE_SKY_AUTH();
-        $SKY_AUTH = $ROUTE . '-SKY_AUTH-' . $GLOBALS['GEN__WORLD_NAME'] . '.php';
+        $SKY_AUTH = $ROUTE . '-SKY_AUTH-' . $_POST['SYS_SLUG'] . '.php';
 
     file_put_contents($SKY_AUTH, $CREATED_SKY_AUTH);
 
-        $CREATED_SKY_SIG = CREATE_SKY_SIG($GLOBALS['GEN__WORLD_NAME'], $GLOBALS['GEN__WORLD_SYS'], $GLOBALS['GEN__WORLD_DOM'], $GLOBALS['GEN__WORLD_MOD'], $GLOBALS['VARIANT']);
-        $SKY_SIG = $ROUTE . '-SKY_SIG-' . $GLOBALS['GEN__WORLD_NAME'] . '.php';
+        $CREATED_SKY_SIG = CREATE_SKY_SIG();
+        $SKY_SIG = $ROUTE . '-SKY_SIG-' . $_POST['SYS_SLUG'] . '.php';
 
     file_put_contents($SKY_SIG, $CREATED_SKY_SIG);
 
-        $CREATED_INDEX = CREATE_INDEX($GLOBALS['GEN__WORLD_NAME'], $GLOBALS['VARIANT']);
+        $CREATED_INDEX = CREATE_INDEX();
         $INDEX = $ROUTE . 'index.php';
 
     file_put_contents($INDEX, $CREATED_INDEX);
 
 //  KHAF ROUTE LINE >>>>>>>>>>>>>>>>>>>>>>>>
-$ROUTE__LINE = ROUTE("c", $SHADOW_PROD_TOGGLE);
+$ROUTE__LINE = ROUTE("c", $sha_env);
 
-    $ROUTE = $ROUTE__LINE . $GLOBALS['GEN__WORLD_NAME'] . '/';
+    $ROUTE = $ROUTE__LINE . $_POST['SYS_SLUG'] . '/';
     
         if (is_dir($ROUTE)) { KDE($KDE__ERROR_TYPE, $KDE__SOURCE, $KDE__ECHO_CHAIN, $KDE__ERROR);}
         else { mkdir($ROUTE, 0775, true); }
         
-        $CREATED_WORLD_SIG = CREATE_WORLD_SIG($GLOBALS['GEN__WORLD_NAME'], $GLOBALS['POST__LOVERS_MARK'], $GLOBALS['GEN__ROOM'], $GLOBALS['VARIANT']);
-        $WORLD_SIG = $ROUTE . '--SIG--' . $GLOBALS['GEN__WORLD_NAME'] . '.php';
+        $CREATED_WORLD_SIG = CREATE_WORLD_SIG();
+        $WORLD_SIG = $ROUTE . '--SIG--' . $_POST['SYS_SLUG'] . '.php';
 
-        $CREATED_ERROR_FIG = CREATE_ERROR_FIG($GLOBALS['VARIANT']);
+        $CREATED_ERROR_FIG = CREATE_ERROR_FIG();
         $ERROR_FIG = $ROUTE . '-FIG--routeErrors.php';
+
+        $CREATED_NAV_FIG = CREATE_NAV_FIG();
+        $NAV_FIG = $ROUTE . '-FIG--nav.php';
             
     file_put_contents($WORLD_SIG, $CREATED_WORLD_SIG);
     file_put_contents($ERROR_FIG, $CREATED_ERROR_FIG);
+    file_put_contents($NAV_FIG, $CREATED_NAV_FIG);
 
 //  MEM ROUTE LINE >>>>>>>>>>>>>>>>>>>>>>>>
-$ROUTE__LINE = ROUTE("m", $SHADOW_PROD_TOGGLE);
+$ROUTE__LINE = ROUTE("m", $sha_env);
 
-    $ROUTE = $ROUTE__LINE . 'rooms/' . $GLOBALS['GEN__WORLD_NAME'] .'/';
+    $ROUTE = $ROUTE__LINE . 'rooms/' . $_POST['SYS_SLUG'] .'/';
 
-    $WELCOME_ROOM = $ROUTE . '/WELCOME-HOME/';
-    $FIRST_ROOM = $ROUTE . $GLOBALS['GEN__ROOM'] . '/';
+    $WELCOME_ROOM = $ROUTE . '/public/';
+    $FIRST_ROOM = $ROUTE . $_POST['DOM_SLUG'] . '/';
     
         if (!is_dir($WELCOME_ROOM)) { mkdir($WELCOME_ROOM, 0775, true); }
         if (!is_dir($FIRST_ROOM)) { mkdir($FIRST_ROOM, 0775, true); }
 
-        $CREATED_WELCOME_ROOM = CREATE_WELCOME_HOME($GLOBALS['GEN__WORLD_NAME'], $GLOBALS['GEN__ROOM'], $GLOBALS['VARIANT']);
+        $CREATED_WELCOME_ROOM = CREATE_WELCOME_HOME();
         $WELCOME_HOME = $WELCOME_ROOM . 'hi-from-SKY.php';
 
+        $CREATED_FIRST_ROOMKEY = CREATE_FIRST_ROOMKEY();
+        $FIRST_ROOM = $FIRST_ROOM . $_POST['KEY_SLUG'] . '.php';
+
     file_put_contents($WELCOME_HOME, $CREATED_WELCOME_ROOM);
+    file_put_contents($FIRST_ROOM, $CREATED_FIRST_ROOMKEY);
 
 //  ALEPH ROUTE LINE >>>>>>>>>>>>>>>>>>>>>>>>
-$ROUTE__LINE = ROUTE('a', $SHADOW_PROD_TOGGLE);
+$ROUTE__LINE = ROUTE('a', $sha_env);
 
-    $ROUTE = $ROUTE__LINE . $GLOBALS['GEN__WORLD_NAME'] . '/' . $POST__ACTING__AS . '/';
+    $ROUTE = $ROUTE__LINE . $_POST['SYS_SLUG'] . '/asSys/';
     
         if (is_dir($ROUTE)) { KDE($$KDE__ERROR_TYPE, $KDE__SOURCE, $KDE__ECHO_CHAIN, $KDE__ERROR);}
         else { mkdir($ROUTE, 0775, true); }
 
-        $CREATED_SHELL = CREATE_BASE_SHELL($GLO['VARIANT']);
+        $CREATED_SHELL = CREATE_BASE_SHELL($GLOBALS['VARIANT']);
         $SHELL = $ROUTE . 'shell.php';
 
-        $CREATED_HEADER = CREATE_BASE_HEADER($GLOBALS['GEN__WORLD_NAME'], $GLOBALS['VARIANT']);
+        $CREATED_HEADER = CREATE_BASE_HEADER($GLOBALS['VARIANT']);
         $HEADER = $ROUTE . 'header.php';
 
         $CREATED_FOOTER = CREATE_BASE_FOOTER($GLOBALS['VARIANT']);
         $FOOTER = $ROUTE . 'footer.php';
+
+        $CREATED_NAV = CREATE_BASE_NAV($GLOBALS['VARIANT']);
+        $NAV = $ROUTE . 'nav.php';
 
         $CREATED_STYLESHEET = CREATE_BASIC_STYLE($GLOBALS['VARIANT']);
         $STYLE = $ROUTE . 'style.css'; //empty sheet
@@ -165,6 +116,7 @@ $ROUTE__LINE = ROUTE('a', $SHADOW_PROD_TOGGLE);
     file_put_contents($HEADER, $CREATED_HEADER);
     file_put_contents($FOOTER, $CREATED_FOOTER);
     file_put_contents($STYLE, $CREATED_STYLESHEET);
+    file_put_contents($NAV, $CREATED_NAV);
 
 
 }

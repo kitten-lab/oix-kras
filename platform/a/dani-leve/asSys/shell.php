@@ -17,8 +17,9 @@ foreach ($GLOBALS['GETS']['dressing'] as $fn) {
 <title><?= $GLOBALS['pageTitle'] ?></title>
 
 </head>
+
 <!-- END OPENING PRAYERS -->
-<body>
+<body class="theme-<?= $GLOBALS[$SITE]['ROOM_FLAVOR'] ?>">
 
 <main>
 

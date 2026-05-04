@@ -8,7 +8,7 @@ require_once $GLOBALS['INTERA']['SYSTEM'] . "invokeSky.php";
 
 require_once $INTERA['CONFIG'] . 'env_config.php';
 
-require_once __DIR__ .  "/-SKY_SIG-{{SYS_SLUG}}.php";
+require_once __DIR__ .  "/-SKY_SIG-imported-to.php";
 
 require_once $SONAR . 'complexRoutes.php';
 
@@ -16,6 +16,6 @@ $SHELL_ROUTE = $ROUTE['A'][$SYS];
 
 getSkyAUTH($SHELL_ROUTE);
 
-include $ROUTE['C'][$SYS] . '--SIG--' . $SITE . '.php';
+include $ROUTE['C'][$SYS] . '--SIG--' . $SYS . '.php';
 
 ?>

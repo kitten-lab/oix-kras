@@ -14,12 +14,12 @@ SKY__AUTH(
 
 openSky("SKYLINE WELCOME MAT");
 
-bigHeading("Welcome to home {{SYS_DISPLAY}}! You are now on SKYLINE On INTERA.");
+bigHeading("Welcome to home Imported.to, Unlikely Worlds Imported to You!! You are now on SKYLINE On INTERA.");
 medHeading("THANK YOU FOR JOINING US.");
 
 leaf("Thank you for becoming part of our SIGHT. We CUKRA.");
 leaf("Your first room and key is ready!");
-leaf("<a href='" . b_root . "/{{URI}}?{{DOM_SLUG}}={{KEY_SLUG}}'>CLICK HERE!</a>");
+leaf("<a href='" . b_root . "/imported-to?cities=districts-map'>CLICK HERE!</a>");
 
 closeSky();
 ?>

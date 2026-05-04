@@ -39,78 +39,126 @@ function KDE($ERROR_TYPE, $SOURCE, $ECHO_CHAIN, $ERROR) {
 
 
 
-// create a WORLD AUTH file //
+// create a SKY AUTH file //
 function CREATE_SKY_AUTH() {
     $template = file_get_contents(TEMPLATE('/SKY_AUTH.php')); 
-    return str_replace('{{SYS_DISPLAY}}', $_POST['GEN_SYS_DISPLAY'], $template);
+    return str_replace('{{SYS_SLUG}}', $_POST['SYS_SLUG'], $template);
 }
 
 // create a WORLD SIG file //
-function CREATE_SKY_SIG($WORLD_NAME, $WORLD_SYS, $WORLD_DOM, $WORLD_MOD, $VARIANT){
-    $template = file_get_contents(TEMPLATE('/SKY_SIG.php', $VARIANT));
+function CREATE_SKY_SIG(){
+    $template = file_get_contents(TEMPLATE('/SKY_SIG.php'));
     
     $result = str_replace(
-        ['{{WORLD_NAME}}'],
-        [$WORLD_NAME],
+        ['{{SYS_SLUG}}','{{SYS_DISPLAY}}','{{URI}}'],
+        [$_POST['SYS_SLUG'], $_POST['SYS_DISPLAY'], $_POST['URI']],
+    $template);
+    
+    return $result;
+}
+
+
+// create a NAV FIG file //
+function CREATE_NAV_FIG(){
+    $template = file_get_contents(TEMPLATE('/-FIG-nav.php'));
+    
+    $result = str_replace(
+        ['{{DOM_SLUG}}','{{DOM_DISPLAY}}','{{KEY_SLUG}}','{{KEY_DISPLAY}}'],
+        [$_POST['DOM_SLUG'], $_POST['DOM_DISPLAY'], $_POST['KEY_SLUG'], $_POST['KEY_DISPLAY']],
     $template);
     
     return $result;
 }
 
 // create a WORLD SIG file //
-function CREATE_WORLD_SIG($WORLD_NAME, $LOVERS_MARK, $ROOM, $VARIANT){
-    $template = file_get_contents(TEMPLATE('/WORLD_SIG.php', $VARIANT));
+function CREATE_WORLD_SIG(){
+    $template = file_get_contents(TEMPLATE('/WORLD_SIG.php'));
 
     $result = str_replace(
-        ['{{WORLD_NAME}}', '{{LOVERS_MARK}}', '{{ROOM}}'],
-        [$WORLD_NAME, $LOVERS_MARK, $ROOM],
+        ['{{LOVERS_MARK}}'],
+        [$_POST['LOVERS_MARK']],
     $template);
     
     return $result;
 }
 
 // MAKE THE DEFAULT ERRORS FOR DOORS
-function CREATE_ERROR_FIG($VARIANT){
+function CREATE_ERROR_FIG(){
     $template = file_get_contents(TEMPLATE('/ERROR_FIG.php', $VARIANT));
     return $template;
 }
 
  // MAKE THE INDEX
-function CREATE_INDEX($WORLD_NAME, $VARIANT){
-    $template = file_get_contents(TEMPLATE('/index.php', $VARIANT));
-    return str_replace('{{WORLD_NAME}}', $WORLD_NAME, $template);
+function CREATE_INDEX(){
+    $template = file_get_contents(TEMPLATE('/index.php')); 
+    return str_replace('{{SYS_SLUG}}', $_POST['SYS_SLUG'], $template);
 }
 
- // MAKE THE INDEX
-function CREATE_WELCOME_HOME($WORLD_NAME, $ROOM, $VARIANT){
-    $template = file_get_contents(TEMPLATE('/welcome.php', $VARIANT));
+ // MAKE THE WELCOME
+function CREATE_WELCOME_HOME(){
+    $template = file_get_contents(THEME_TEMPLATE('/welcome.php'));
 
     $result = str_replace(
-        ['{{WORLD_NAME}}', '{{ROOM}}'],
-        [$WORLD_NAME, $ROOM],
+        ['{{URI}}', '{{SYS_DISPLAY}}', '{{DOM_SLUG}}', '{{KEY_SLUG}}'],
+        [$_POST['URI'], $_POST['SYS_DISPLAY'], $_POST['DOM_SLUG'], $_POST['KEY_SLUG']],
+    $template);
+    
+    return $result;
+}
+
+
+ // MAKE THE FIRST KEY
+function CREATE_FIRST_ROOMKEY(){
+    $template = file_get_contents(TEMPLATE('/{{KEY_SLUG}}.php'));
+
+    $result = str_replace(
+        [
+        '{{MOD_SLUG}}', 
+        '{{MOD_DISPLAY}}', 
+        '{{DOM_SLUG}}', 
+        '{{DOM_DISPLAY}}',
+        '{{KEY_SLUG}}', 
+        '{{KEY_DISPLAY}}'
+        ],
+        [
+        $_POST['MOD_SLUG'], 
+        $_POST['MOD_DISPLAY'], 
+        $_POST['DOM_SLUG'], 
+        $_POST['DOM_DISPLAY'],
+        $_POST['KEY_SLUG'], 
+        $_POST['KEY_DISPLAY']
+            ],
     $template);
     
     return $result;
 }
 
 function CREATE_BASE_SHELL($VARIANT) {
-    $template = file_get_contents(TEMPLATE('/shell.php', $VARIANT));
-
-    return $template;
+    $template = file_get_contents(THEME_TEMPLATE('/shell.php', $VARIANT));
+    return str_replace('{{SYS_SLUG}}', $_POST['SYS_SLUG'], $template);
 }
 
-function CREATE_BASE_HEADER($WORLD_NAME, $VARIANT){
-    $template = file_get_contents(TEMPLATE('/header.php', $VARIANT));
-    return str_replace('{{WORLD_NAME}}', $WORLD_NAME, $template);
+function CREATE_BASE_HEADER($VARIANT){
+    $template = file_get_contents(THEME_TEMPLATE('/header.php', $VARIANT));
+    $result = str_replace(
+        ['{{SYS_SLUG}}','{{SYS_DISPLAY}}'],
+        [$_POST['SYS_SLUG'], $_POST['SYS_DISPLAY']],
+    $template);
+    return $result;
 }
 
 function CREATE_BASE_FOOTER($VARIANT){
-    $template = file_get_contents(TEMPLATE('/footer.php', $VARIANT));
+    $template = file_get_contents(THEME_TEMPLATE('/footer.php', $VARIANT));
+    return $template;
+}
+
+function CREATE_BASE_NAV($VARIANT){
+    $template = file_get_contents(THEME_TEMPLATE('/nav.php', $VARIANT));
     return $template;
 }
 
 function CREATE_BASIC_STYLE($VARIANT){
-    $template = file_get_contents(TEMPLATE('/style.css', $VARIANT));
+    $template = file_get_contents(THEME_TEMPLATE('/style.css', $VARIANT));
     return $template;
 }
 ?>
